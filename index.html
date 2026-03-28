@@ -11,37 +11,58 @@
   </style>
   <style>
     :root {
-      background-color: #111;
-      font-family: "Mi Sans", "Segoe UI", "Microsoft YaHei", "PingFang SC", -apple-system, BlinkMacSystemFont, sans-serif;
+      --bg-color: #111;
+      --bg-secondary: #222;
+      --text-primary: #eee;
+      --text-secondary: #888;
+      --accent-color: #66ccff;
+      --scrollbar-thumb: #666;
+      --scrollbar-thumb-hover: #777;
+      --scrollbar-thumb-active: #555;
+      --font-family: "Mi Sans", "Segoe UI", "Microsoft YaHei", "PingFang SC", -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-weight: 500;
+      --font-weight-bold: 700;
+    }
+
+    :root {
+      background-color: var(--bg-color);
+      font-family: var(--font-family);
+      font-weight: var(--font-weight);
     }
 
     ::-webkit-scrollbar {
-      background-color: #111;
+      background-color: var(--bg-color);
     }
 
     ::-webkit-scrollbar-thumb {
-      background-color: #666;
+      background-color: var(--scrollbar-thumb);
     }
 
     ::-webkit-scrollbar-thumb:hover {
-      background-color: #777;
+      background-color: var(--scrollbar-thumb-hover);
     }
 
     ::-webkit-scrollbar-thumb:active {
-      background-color: #555;
+      background-color: var(--scrollbar-thumb-active);
     }
 
     * {
       box-sizing: border-box;
-    }
-
-    img {
-      max-width: 100%;
+      font-weight: 500;
     }
 
     body {
       position: relative;
       overflow-x: hidden;
+      font-weight: 500;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      font-weight: 700;
+    }
+
+    img {
+      max-width: 100%;
     }
 
     .blueprint-bg {
@@ -103,7 +124,7 @@
     .tab {
       display: flex;
       position: fixed;
-      background-color: #222;
+      background-color: rgba(34, 34, 34, 0.9);
       width: 100%;
       margin: 0;
       left: 0;
@@ -128,6 +149,7 @@
     }
 
     .page {
+      position: relative;
       min-height: calc(100vh - 60px);
       padding-top: 60px;
       animation: fadeIn 0.4s ease-out;
@@ -184,6 +206,7 @@
     .proxy-selector {
       position: relative;
       display: inline-block;
+      height: 100%;
     }
 
     .proxy-btn {
@@ -216,42 +239,54 @@
     .proxy-menu {
       display: none;
       position: absolute;
-      top: 100%;
+      top: calc(100% + 5px);
       right: 0;
-      background-color: var(--proxy-menu-background);
-      min-width: 160px;
-      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-      border-radius: 8px;
+      background: rgba(35,35,35,0.98);
+      backdrop-filter: blur(15px);
+      min-width: 180px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+      border-radius: 10px;
       z-index: 1000;
       overflow: hidden;
+      opacity: 0;
+      transform: translateY(-8px);
+      transition: all 0.2s ease;
     }
 
     .proxy-menu.show {
       display: block;
+      opacity: 1;
+      transform: translateY(0);
     }
 
     .proxy-option {
-      padding: 10px 15px;
+      padding: 11px 16px;
       cursor: pointer;
-      transition: background-color 0.2s;
+      transition: all 0.2s ease;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      color: var(--text-color, #eee);
+      color: #ddd;
       font-size: 13px;
+      border-left: 3px solid transparent;
     }
 
     .proxy-option:hover {
-      background-color: var(--proxy-menu-hover);
+      background: rgba(255,255,255,0.06);
+      color: #fff;
+      border-left-color: #0099ff;
     }
 
     .proxy-option.active {
-      background-color: var(--proxy-menu-active);
+      background: rgba(0,153,255,0.12);
+      color: #0099ff;
+      border-left-color: #0099ff;
     }
 
     .proxy-option .check {
-      color: #4CAF50;
+      color: #0099ff;
       font-weight: bold;
+      font-size: 11px;
     }
 
     .dropdown {
@@ -289,6 +324,7 @@
     }
 
     .download-section {
+      position: relative;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -306,6 +342,7 @@
     }
 
     .download-cards {
+      position: relative;
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
@@ -363,46 +400,128 @@
       font-family: "Mi Sans", "Segoe UI", "Microsoft YaHei", "PingFang SC", -apple-system, BlinkMacSystemFont, sans-serif;
     }
 
-    .submenu {
-      display: none;
-      position: absolute;
-      top: 100%;
-      left: 0;
-      right: 0;
-      background-color: #1a1a1a;
+    .download-panel {
+      visibility: hidden;
+      opacity: 0;
+      max-height: 0;
+      width: 100%;
+      background: linear-gradient(180deg, rgba(20,20,20,0.98) 0%, rgba(30,30,30,0.98) 100%);
+      backdrop-filter: blur(20px);
+      padding: 0 0;
+      margin-top: 15px;
       border-radius: 10px;
-      margin-top: 10px;
-      max-height: 300px;
-      overflow-y: auto;
-      z-index: 100;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+      overflow: hidden;
+      transition: visibility 0.25s ease, opacity 0.25s ease, max-height 0.25s ease, padding 0.25s ease;
     }
 
-    .submenu.show {
-      display: block;
-      animation: fadeInUp 0.3s ease-out;
+    .download-panel.show {
+      visibility: visible;
+      opacity: 1;
+      max-height: 500px;
+      padding: 15px 0;
     }
 
-    .submenu-item {
-      color: #ccc;
-      padding: 12px 20px;
+    .download-panel-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .download-panel-title {
+      color: #888;
+      font-size: 12px;
+      margin-bottom: 15px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .download-items {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .download-item {
+      flex: 1 1 calc(33.333% - 10px);
+      min-width: 280px;
+      background: rgba(255,255,255,0.05);
+      border-radius: 8px;
+      padding: 15px 20px;
       cursor: pointer;
-      transition: background-color 0.2s ease;
-      font-size: 0.9rem;
-      border-bottom: 1px solid #333;
+      transition: all 0.25s ease;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
     }
 
-    .submenu-item:last-child {
-      border-bottom: none;
+    .download-item:hover {
+      background: rgba(0,153,255,0.15);
+      border-color: #0099ff;
+      transform: translateY(-2px);
+      box-shadow: 0 5px 20px rgba(0,153,255,0.2);
     }
 
-    .submenu-item:hover {
-      background-color: #333;
+    .download-item-name {
+      color: #ddd;
+      font-size: 14px;
+      font-weight: 600;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .download-item:hover .download-item-name {
       color: #fff;
+    }
+
+    .download-item-size {
+      color: #666;
+      font-size: 12px;
+      white-space: nowrap;
+    }
+
+    .download-item:hover .download-item-size {
+      color: #0099ff;
     }
 
     .download-card {
       position: relative;
+      background-color: #222;
+      border-radius: 15px;
+      padding: 40px 50px;
+      width: 200px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .download-card.expanded {
+      background-color: #2a2a2a;
+      transform: translateY(-5px);
+    }
+
+    .download-card.active {
+      background-color: #2a2a2a;
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+
+    .download-card::after {
+      content: '▼';
+      position: absolute;
+      bottom: 15px;
+      font-size: 10px;
+      color: #666;
+      transition: transform 0.3s ease;
+    }
+
+    .download-card.expanded::after {
+      transform: rotate(180deg);
+      color: #0099ff;
     }
 
     @media (max-width: 768px) {
@@ -654,15 +773,76 @@
 
     .end {
       padding: 60px;
+      padding-bottom: 20px;
       margin: 0;
       margin-top: 100px;
-      background-color: #222;
+      background-color: rgba(34, 34, 34, 0.9);
       left: 0;
       width: 100%;
-      min-height: 100px;
+      min-height: 200px;
       top: 0;
       display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .end-content {
+      display: flex;
       justify-content: space-between;
+      width: 100%;
+      flex: 1;
+    }
+
+    .end-copyright {
+      text-align: center;
+      padding: 20px 0 0 0;
+      margin-top: auto;
+      color: #888;
+      font-size: 0.9rem;
+      font-family: 'Mi Sans', 'Segoe UI', 'Microsoft YaHei', 'PingFang SC', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    .bubbles-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      pointer-events: none;
+      z-index: -1;
+      overflow: hidden;
+    }
+
+    .bubble {
+      position: absolute;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, rgba(200, 240, 255, 0.5), rgba(100, 180, 255, 0.3));
+      box-shadow: 0 0 15px rgba(100, 180, 255, 0.4), inset 0 0 15px rgba(255, 255, 255, 0.25);
+      cursor: pointer;
+      pointer-events: auto;
+      animation: bubbleBreathe 4s ease-in-out infinite;
+      will-change: transform, opacity;
+    }
+
+    @keyframes bubbleBreathe {
+      0%, 100% { transform: scale(1); opacity: 0.7; }
+      50% { transform: scale(1.06); opacity: 0.85; }
+    }
+
+    .bubble:hover {
+      transform: scale(1.15);
+    }
+
+    .bubble.popping {
+      animation: bubblePop 0.3s ease-out forwards;
+      pointer-events: none;
+    }
+
+    @keyframes bubblePop {
+      0% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.3); opacity: 0.7; }
+      100% { transform: scale(0); opacity: 0; }
     }
 
     body {
@@ -1385,7 +1565,7 @@
       width: 0.6rem;
       height: 0.6rem;
       border-width: 0.2rem;
-      border-color: #17f700;
+      border-color: #0099ff;
     }
 
     .pointer div:nth-child(1) {
@@ -1462,25 +1642,28 @@
     <div class="page" id="page-download" data-page="download" style="display:none"></div>
   </div>
   <div class="end">
-    <div>
-      <img src="data:image/svg+xml,&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; width=&quot;1229&quot; height=&quot;290&quot;&gt;&lt;rect fill-opacity=&quot;0&quot;/&gt;&lt;/svg&gt;" alt="updateBG" class="endlogo" style="background-blend-mode:normal!important;background-clip:content-box!important;background-position:50% 50%!important;background-color:rgba(0,0,0,0)!important;background-image:var(--sf-img-1)!important;background-size:100% 100%!important;background-origin:content-box!important;background-repeat:no-repeat!important"><br>
-      <span class="endby">AstraEditor 下载站</span><br>
-      <span class="introend">
-        本项目使用 AstraEditor 项目组开放的 AstraEditor 下载链接<br>
-        本项目与 AstraEditor 项目组 无关
-      </span>
-    </div>
-    <div>
-      <span class="link">QQ</span><br>
-      <div style="display:flex;margin:10px">
-        <a class="iconLinkB" href="https://qm.qq.com/q/ynYzV85oHY">
-          <img class="iconLink" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAACXBIWXMAACE4AAAhOAFFljFgAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAARcSURBVHgB7Z2NUdswFMf/6XWAdALEBNAJaiZomQAzQekEJBOUTsAIzQawQekEdicgnUDVO8uHa0icSHqyJb/fnc6Q5GxLT+9DlvwECIIgCIIgzJEFJo7WujCHc1PO7HFpiur9rDZla4+/TXky5XGxWGwhHA81uin3pjxrPx5MKU1ZQhjGNlalw1OZcmuKgvAa3fT4J81PZUoJ4QXTIN91fB703LXBNMDSNsRYVHoCQhglCrIVf8DraCY2FCVdmGjpCSMRXQC6iUh+YfzGbxlVCO8Qn3tMp/EJ6hA/xzJHUQVgKnlrDl8wPRSajpEv1MP09FkhMtF8gKlchWmZnl2cGn9QIxJRTJBuBj8KaRDVFEXRgIR6fwtFRY+IALsGJNb7W24RCXYNSLD3t0TRAlYNMI1PIadCmkQJl7lN0BRj/kO50hHmEdhMkL35Z6QNuxni1IAC6cOuwZwCSNn8tHwGM5wCOEP60OMTBUZYBGDt/znyoAAjXBqQS+MTrHURAQyjwAiXABTygdWXcQkgBwfcosAIlwCyWonGGQmJCToMtg4lGnAYyQkgNxSYCC4ALSuRj4JDA0QARxBcADFXFOSA+ICR4fABCvmRVBRUIj/Y5gWCT0kmvApiCJbpyaAakPgqiCFYZvhCm6AS+cKySiKYAKzzZZ9DHRFq/BKBCakBJfIneAcL5oQzdr59gjrjIBqQufPtE9QZhzJBJeZDUGfsLYAZON8+QZ1xCA0oMD+CdThvJzwj59vnQ4h0OF4aYBqf1v8ozJMbBMDXBAW5iUT5hAD4CiDITSQKpdgp4ImzAOzFFeZNAU98NCCH9f++eFsAHwHM2fy0FL4zgE4CsBfNaQW0D16WwFUDCggtBTxwFYDY/xe8TLGrAHJafu7L0g5InThaADMf/e6igCMuGqAg9HG2CC4CGFK3GnmyL6lfPBM0cLE18hXAtz3fKTjiIoCTHZ/X5vHsyhz/ID+2dh74x47vl64DspA+4MIe96lqqrR1WmG3hjtNU7oI4K0LrTvL0nMUAO1JADsBc4km2WufaALos7Gmp4UE4D1TNDE27R82w+4agXARQLdxa/Sck+0lOWlB3V8HZP6/w25/cBQ+AqjRLFKq3/hNsB4yAR7f+tDU+6b3XY0YUHZZfUD+fc2zE8YYqD11pOjnTjcLE6aFbrYjSR32JK6saSt1+ktW2NMYc7+kd410Wcd44zNG4laKGL4iLSjyOUUEYgiABii0XUkqU5gU5X2M9b4z+3vCndFjjTS4zi59va0QPSuqMW2o8TfIFd3solHpaVJiBN4jErpZSXeF6SbzuDL3SMdNzE1AuccB1NgUAZVIZzxQo3nEsF6knHhEN/tDVjpt2DdyYNEAe+Mr5AHtS3wBJjhyReSQtr7PJVd0xBWG1sgLNqfMZYIUmpFvgWYSv7sN+RL7I6Et/q/wtlf+4mX7cnTOe9I7t+qcY+ia6JyvPTcdaSpyI1nABEEQBEEQQvMP82DW+u24kOQAAAAASUVORK5CYII=" alt="qq">
-        </a>
+    <div class="bubbles-container" id="bubbles-container"></div>
+    <div class="end-content">
+      <div>
+        <img src="data:image/svg+xml,&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; width=&quot;1229&quot; height=&quot;290&quot;&gt;&lt;rect fill-opacity=&quot;0&quot;/&gt;&lt;/svg&gt;" alt="updateBG" class="endlogo" style="background-blend-mode:normal!important;background-clip:content-box!important;background-position:50% 50%!important;background-color:rgba(0,0,0,0)!important;background-image:var(--sf-img-1)!important;background-size:100% 100%!important;background-origin:content-box!important;background-repeat:no-repeat!important"><br>
+        <span class="endby">AstraEditor 下载站</span><br>
+        <span class="introend">
+          本项目使用 AstraEditor 项目组开放的 AstraEditor 下载链接<br>
+          本项目与 AstraEditor 项目组 无关
+        </span>
+      </div>
+      <div>
+        <span class="link">QQ</span><br>
+        <div style="display:flex;margin:10px">
+          <a class="iconLinkB" href="https://qm.qq.com/q/ynYzV85oHY">
+            <img class="iconLink" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAACXBIWXMAACE4AAAhOAFFljFgAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAARcSURBVHgB7Z2NUdswFMf/6XWAdALEBNAJaiZomQAzQekEJBOUTsAIzQawQekEdicgnUDVO8uHa0icSHqyJb/fnc6Q5GxLT+9DlvwECIIgCIIgzJEFJo7WujCHc1PO7HFpiur9rDZla4+/TXky5XGxWGwhHA81uin3pjxrPx5MKU1ZQhjGNlalw1OZcmuKgvAa3fT4J81PZUoJ4QXTIN91fB703LXBNMDSNsRYVHoCQhglCrIVf8DraCY2FCVdmGjpCSMRXQC6iUh+YfzGbxlVCO8Qn3tMp/EJ6hA/xzJHUQVgKnlrDl8wPRSajpEv1MP09FkhMtF8gKlchWmZnl2cGn9QIxJRTJBuBj8KaRDVFEXRgIR6fwtFRY+IALsGJNb7W24RCXYNSLD3t0TRAlYNMI1PIadCmkQJl7lN0BRj/kO50hHmEdhMkL35Z6QNuxni1IAC6cOuwZwCSNn8tHwGM5wCOEP60OMTBUZYBGDt/znyoAAjXBqQS+MTrHURAQyjwAiXABTygdWXcQkgBwfcosAIlwCyWonGGQmJCToMtg4lGnAYyQkgNxSYCC4ALSuRj4JDA0QARxBcADFXFOSA+ICR4fABCvmRVBRUIj/Y5gWCT0kmvApiCJbpyaAakPgqiCFYZvhCm6AS+cKySiKYAKzzZZ9DHRFq/BKBCakBJfIneAcL5oQzdr59gjrjIBqQufPtE9QZhzJBJeZDUGfsLYAZON8+QZ1xCA0oMD+CdThvJzwj59vnQ4h0OF4aYBqf1v8ozJMbBMDXBAW5iUT5hAD4CiDITSQKpdgp4ImzAOzFFeZNAU98NCCH9f++eFsAHwHM2fy0FL4zgE4CsBfNaQW0D16WwFUDCggtBTxwFYDY/xe8TLGrAHJafu7L0g5InThaADMf/e6igCMuGqAg9HG2CC4CGFK3GnmyL6lfPBM0cLE18hXAtz3fKTjiIoCTHZ/X5vHsyhz/ID+2dh74x47vl64DspA+4MIe96lqqrR1WmG3hjtNU7oI4K0LrTvL0nMUAO1JADsBc4km2WufaALos7Gmp4UE4D1TNDE27R82w+4agXARQLdxa/Sck+0lOWlB3V8HZP6/w25/cBQ+AqjRLFKq3/hNsB4yAR7f+tDU+6b3XY0YUHZZfUD+fc2zE8YYqD11pOjnTjcLE6aFbrYjSR32JK6saSt1+ktW2NMYc7+kd410Wcd44zNG4laKGL4iLSjyOUUEYgiABii0XUkqU5gU5X2M9b4z+3vCndFjjTS4zi59va0QPSuqMW2o8TfIFd3solHpaVJiBN4jErpZSXeF6SbzuDL3SMdNzE1AuccB1NgUAZVIZzxQo3nEsF6knHhEN/tDVjpt2DdyYNEAe+Mr5AHtS3wBJjhyReSQtr7PJVd0xBWG1sgLNqfMZYIUmpFvgWYSv7sN+RL7I6Et/q/wtlf+4mX7cnTOe9I7t+qcY+ia6JyvPTcdaSpyI1nABEEQBEEQQvMP82DW+u24kOQAAAAASUVORK5CYII=" alt="qq">
+          </a>
+        </div>
       </div>
     </div>
-  </div>
-  <div style="text-align:center;padding:20px 0;color:#888;font-size:0.9rem;font-family:'Mi Sans','Segoe UI','Microsoft YaHei','PingFang SC',-apple-system,BlinkMacSystemFont,sans-serif;">
-    2026 Bilibili@ningqi 参与制作
+    <div class="end-copyright">
+      2026 Bilibili@ningqi 参与制作
+    </div>
   </div>
   <div class="troywell-avia">
     <template shadowrootmode="open">
@@ -3977,15 +4160,48 @@
     document.querySelector('.dropdown').classList.toggle('show');
   }
 
-  function toggleSubmenu(id) {
-    const submenu = document.getElementById('submenu-' + id);
-    const allSubmenus = document.querySelectorAll('.submenu');
-    allSubmenus.forEach(el => {
-      if (el !== submenu) {
-        el.classList.remove('show');
-      }
+  let downloadData = {
+    windows: [],
+    macos: [],
+    linux: [],
+    source: []
+  };
+
+  let currentPlatform = 'windows';
+
+  function switchPlatform(key) {
+    const panel = document.getElementById('download-panel');
+    const cardNames = { windows: 'Windows', macos: 'macOS', linux: 'Linux', source: '源码' };
+    const assets = downloadData[key] || [];
+    const title = document.getElementById('download-panel-title');
+    const items = document.getElementById('download-items');
+
+    if (currentPlatform === key && panel.classList.contains('show')) {
+      panel.classList.remove('show');
+      return;
+    }
+
+    document.querySelectorAll('.download-card').forEach(el => el.classList.remove('active'));
+    document.querySelector(`.download-card[onclick="switchPlatform('${key}')"]`).classList.add('active');
+
+    title.textContent = cardNames[key] + ' 下载';
+
+    let itemsHtml = '';
+    assets.forEach(asset => {
+      itemsHtml += `<div class="download-item" onclick="animateToPage('${asset.proxied_url}')">`;
+      itemsHtml += `<span class="download-item-name">${asset.name}</span>`;
+      itemsHtml += '</div>';
     });
-    submenu.classList.toggle('show');
+    items.innerHTML = itemsHtml;
+    currentPlatform = key;
+    panel.classList.add('show');
+  }
+
+  function hideDownloadPanel() {
+    const panel = document.getElementById('download-panel');
+    if (panel) {
+      panel.classList.remove('show');
+    }
   }
 
   const proxyList = [
@@ -4067,6 +4283,8 @@
         }
       });
 
+      downloadData = categorized;
+
       const cards = [
         { key: 'windows', name: 'Windows', assets: categorized.windows },
         { key: 'macos', name: 'macOS', assets: categorized.macos },
@@ -4078,16 +4296,19 @@
       let delay = 0.1;
       cards.forEach(card => {
         if (card.assets.length > 0) {
-          html += `<div class="download-card fade-in-up magnetic-target" style="animation-delay: ${delay}s" onclick="toggleSubmenu('${card.key}')">`;
+          const isActive = card.key === 'windows' ? ' active' : '';
+          html += `<div class="download-card fade-in-up magnetic-target${isActive}" style="animation-delay: ${delay}s" onclick="switchPlatform('${card.key}')">`;
           html += `<div class="download-name">${card.name}</div>`;
-          html += `<div class="submenu" id="submenu-${card.key}">`;
-          card.assets.forEach(asset => {
-            html += `<div class="submenu-item" onclick="event.stopPropagation(); animateToPage('${asset.proxied_url}')">${asset.name}</div>`;
-          });
-          html += '</div></div>';
+          html += '</div>';
           delay += 0.1;
         }
       });
+
+      html += `<div class="download-panel" id="download-panel">`;
+      html += `<div class="download-panel-inner">`;
+      html += `<div class="download-panel-title" id="download-panel-title">Windows 下载</div>`;
+      html += `<div class="download-items" id="download-items"></div>`;
+      html += '</div></div>';
 
       document.getElementById('download-cards').innerHTML = html;
 
@@ -4100,20 +4321,194 @@
     }
   }
 
+  const bubbleSettings = {
+    count: 25,
+    minSize: 30,
+    maxSize: 80,
+    maxSpeed: 2.0,
+    damping: 0.998,
+    scrollInfluence: 0.5,
+    colors: ['#66ccff', '#88ddff', '#aaeeff', '#99ddff', '#77bbff']
+  };
+
+  let bubbles = [];
+  let animationId = null;
+  let lastFrameTime = 0;
+  const targetFPS = 60;
+  const frameInterval = 1000 / targetFPS;
+  let scrollVelocityX = 0;
+  let scrollVelocityY = 0;
+  let lastScrollX = 0;
+  let lastScrollY = 0;
+  let mouseX = -1000;
+  let mouseY = -1000;
+
+  function handleScroll() {
+    scrollVelocityX = (window.scrollX - lastScrollX) * 0.1;
+    scrollVelocityY = (window.scrollY - lastScrollY) * 0.1;
+    lastScrollX = window.scrollX;
+    lastScrollY = window.scrollY;
+  }
+
+  function handleMouseMove(e) {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+  }
+
+  window.addEventListener('scroll', handleScroll, { passive: true });
+  window.addEventListener('mousemove', handleMouseMove);
+
+  function createBubble() {
+    const container = document.getElementById('bubbles-container');
+    if (!container) return null;
+
+    const bubble = document.createElement('div');
+    bubble.className = 'bubble';
+
+    const size = bubbleSettings.minSize + Math.random() * (bubbleSettings.maxSize - bubbleSettings.minSize);
+    const x = Math.random() * (window.innerWidth - size);
+    const y = Math.random() * (window.innerHeight - size);
+
+    bubble.style.width = size + 'px';
+    bubble.style.height = size + 'px';
+    bubble.style.left = x + 'px';
+    bubble.style.top = y + 'px';
+    bubble.style.background = `radial-gradient(circle at 30% 30%, ${bubbleSettings.colors[Math.floor(Math.random() * bubbleSettings.colors.length)]}88, ${bubbleSettings.colors[Math.floor(Math.random() * bubbleSettings.colors.length)]}44)`;
+
+    const bubbleData = {
+      element: bubble,
+      x: x,
+      y: y,
+      vx: (Math.random() - 0.5) * bubbleSettings.maxSpeed * 4,
+      vy: (Math.random() - 0.5) * bubbleSettings.maxSpeed * 4,
+      size: size,
+      opacity: 0.6 + Math.random() * 0.4
+    };
+
+    bubble.addEventListener('click', () => popBubble(bubbleData));
+    container.appendChild(bubble);
+
+    return bubbleData;
+  }
+
+  function popBubble(bubbleData) {
+    if (!bubbleData.element.parentNode) return;
+    bubbleData.element.classList.add('popping');
+    setTimeout(() => {
+      if (bubbleData.element.parentNode) {
+        bubbleData.element.parentNode.removeChild(bubbleData.element);
+      }
+      const index = bubbles.indexOf(bubbleData);
+      if (index > -1) bubbles.splice(index, 1);
+
+      setTimeout(() => {
+        if (bubbles.length < bubbleSettings.count) {
+          bubbles.push(createBubble());
+        }
+      }, 500);
+    }, 300);
+  }
+
+  function updateBubbles(timestamp) {
+    if (!lastFrameTime) lastFrameTime = timestamp;
+    const elapsed = timestamp - lastFrameTime;
+    if (elapsed < frameInterval) {
+      animationId = requestAnimationFrame(updateBubbles);
+      return;
+    }
+    lastFrameTime = timestamp - (elapsed % frameInterval);
+
+    const container = document.getElementById('bubbles-container');
+    if (!container) return;
+
+    container.style.position = 'fixed';
+    container.style.top = '0';
+    container.style.left = '0';
+    container.style.right = '0';
+    container.style.bottom = '0';
+
+    scrollVelocityX *= 0.95;
+    scrollVelocityY *= 0.95;
+
+    bubbles.forEach(b => {
+      const bubbleCenterX = b.x + b.size / 2;
+      const bubbleCenterY = b.y + b.size / 2;
+      const dx = bubbleCenterX - mouseX;
+      const dy = bubbleCenterY - mouseY;
+      const distance = Math.sqrt(dx * dx + dy * dy);
+      const repelRadius = b.size * 3;
+
+      if (distance < repelRadius && distance > 0) {
+        const force = (repelRadius - distance) / repelRadius * 0.8;
+        b.vx += (dx / distance) * force;
+        b.vy += (dy / distance) * force;
+      }
+
+      b.vx *= bubbleSettings.damping;
+      b.vy *= bubbleSettings.damping;
+
+      b.vx += scrollVelocityX * bubbleSettings.scrollInfluence;
+      b.vy += scrollVelocityY * bubbleSettings.scrollInfluence;
+
+      if (Math.abs(b.vx) < 0.02) b.vx += (Math.random() - 0.5) * 0.05;
+      if (Math.abs(b.vy) < 0.02) b.vy += (Math.random() - 0.5) * 0.05;
+
+      const maxSpeed = bubbleSettings.maxSpeed;
+      if (Math.abs(b.vx) > maxSpeed) b.vx = Math.sign(b.vx) * maxSpeed;
+      if (Math.abs(b.vy) > maxSpeed) b.vy = Math.sign(b.vy) * maxSpeed;
+
+      b.x += b.vx;
+      b.y += b.vy;
+
+      if (b.x < -b.size * 2) b.x = window.innerWidth + b.size;
+      if (b.x > window.innerWidth + b.size * 2) b.x = -b.size;
+      if (b.y < -b.size * 2) b.y = window.innerHeight + b.size;
+      if (b.y > window.innerHeight + b.size * 2) b.y = -b.size;
+
+      b.element.style.left = b.x + 'px';
+      b.element.style.top = b.y + 'px';
+    });
+
+    animationId = requestAnimationFrame(updateBubbles);
+  }
+
+  function initBubbles() {
+    const container = document.getElementById('bubbles-container');
+    if (!container) return;
+
+    if (animationId) cancelAnimationFrame(animationId);
+    container.innerHTML = '';
+    bubbles = [];
+
+    for (let i = 0; i < bubbleSettings.count; i++) {
+      const b = createBubble();
+      if (b) {
+        b.x = Math.random() * (window.innerWidth - b.size);
+        b.y = Math.random() * (window.innerHeight - b.size);
+        b.element.style.left = b.x + 'px';
+        b.element.style.top = b.y + 'px';
+        bubbles.push(b);
+      }
+    }
+
+    updateBubbles();
+  }
+
   document.addEventListener('DOMContentLoaded', function() {
     initProxyMenu();
     loadDownloadsWithProxy();
+    initBubbles();
   });
 
   document.addEventListener('click', function(event) {
     if (!event.target.closest('.dropdown')) {
       document.querySelectorAll('.dropdown.show').forEach(el => el.classList.remove('show'));
     }
-    if (!event.target.closest('.download-card')) {
-      document.querySelectorAll('.submenu.show').forEach(el => el.classList.remove('show'));
-    }
     if (!event.target.closest('.proxy-selector')) {
       document.querySelectorAll('.proxy-menu.show').forEach(el => el.classList.remove('show'));
+    }
+    if (!event.target.closest('.download-card') && !event.target.closest('.download-panel')) {
+      hideDownloadPanel();
     }
   });
 
