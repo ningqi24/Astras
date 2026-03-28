@@ -4,7 +4,6 @@ const fetch = require('node-fetch');
 const OWNER = 'astraeditor';
 const REPO = 'desktop';
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
-const PROXY_PREFIX = 'https://api.allorigins.win/raw?url=';
 
 async function fetchLatestRelease() {
   const url = `https://api.github.com/repos/${OWNER}/${REPO}/releases/latest`;
@@ -26,8 +25,7 @@ function transformAssets(assets) {
   return assets.map(asset => ({
     name: asset.name,
     size: asset.size,
-    original_url: asset.browser_download_url,
-    proxied_url: `${PROXY_PREFIX}${asset.browser_download_url}`
+    original_url: asset.browser_download_url
   }));
 }
 
