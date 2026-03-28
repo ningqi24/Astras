@@ -39,6 +39,10 @@ jobs:
         run: |
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
+
+          git config pull.rebase true
+          git pull origin ${{ github.ref_name }}
+
           git add public/releases.json
 
           if git diff --staged --quiet; then
@@ -46,6 +50,5 @@ jobs:
             exit 0
           fi
 
-          git config pull.rebase true
-          git pull origin ${{ github.ref_name }}
+          git commit -m "Auto update releases.json $(date +'%Y-%m-%d %H:%M:%S')"
           git push origin HEAD:${{ github.ref_name }}
