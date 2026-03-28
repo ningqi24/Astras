@@ -21,8 +21,6 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -48,9 +46,6 @@ jobs:
             exit 0
           fi
 
-          git fetch origin ${{ github.ref_name }}
-          git rebase origin/${{ github.ref_name }}
-
-          git commit -m "Auto update releases.json $(date +'%Y-%m-%d %H:%M:%S')"
-
-          git push --force-with-lease origin HEAD:${{ github.ref_name }}
+          git config pull.rebase true
+          git pull origin ${{ github.ref_name }}
+          git push origin HEAD:${{ github.ref_name }}
