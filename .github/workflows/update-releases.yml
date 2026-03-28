@@ -2,53 +2,40 @@ name: Update Releases JSON
 
 on:
   schedule:
-    - cron: '0 */6 * * *'          # 每6小时运行一次
-  workflow_dispatch:                # 支持手动触发
+    - cron: '0 */6 * * *'      # 每6小时运行一次
+  workflow_dispatch:            # 支持手动触发
   release:
-    types: [published]              # 发布新版本时触发
+    types: [published]          # 当有发布被发布时触发
 
 permissions:
-  contents: write                   # 允许推送代码
+  contents: write               # 允许推送代码
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true          # 避免并发冲突
+  cancel-in-progress: true      # 同一分支的新运行会取消旧的
 
 jobs:
   update:
     runs-on: ubuntu-latest
+
     steps:
-      # 检出代码（使用默认分支最新提交）
       - name: Checkout repository
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0             # 获取完整历史，便于rebase
 
-      # 设置Node.js环境，启用npm缓存（如果有package.json）
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
-          cache: 'npm'               # 自动缓存node_modules
+          node-version: '20'    # 使用 Node.js 20，原生支持 fetch
 
-      # 安装依赖（如果脚本使用了外部包，否则可删除此步）
-      - name: Install dependencies
-        run: npm ci                  # 使用package-lock.json快速安装
-
-      # 生成 releases.json（脚本应使用原生fetch，无需node-fetch）
       - name: Generate releases.json
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: node generate-release-json.js
 
-      # 提交并推送变更，处理远程更新
       - name: Commit and push if changed
         run: |
-          # 配置Git用户信息
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
-
-          # 添加生成的文件
           git add public/releases.json
 
           # 检查是否有变更
@@ -57,26 +44,12 @@ jobs:
             exit 0
           fi
 
-          # 获取远程分支最新状态
+          # 拉取远程最新提交，并基于它重新应用本地变更
           git fetch origin ${{ github.ref_name }}
+          git rebase origin/${{ github.ref_name }}
 
-          # 将本地更改基于远程最新提交重放（保持线性历史）
-          # 如果发生冲突，说明远程也修改了同一文件，此时策略是保留本地生成内容
-          git rebase origin/${{ github.ref_name }} || {
-            echo "Rebase conflict detected, resolving in favor of local changes"
-            git rebase --abort
-            git reset --hard origin/${{ github.ref_name }}
-            git add public/releases.json
-            git commit -m "Auto update releases.json $(date +'%Y-%m-%d %H:%M:%S')"
-          }
+          # 提交变更
+          git commit -m "Auto update releases.json $(date +'%Y-%m-%d %H:%M:%S')"
 
-          # 如果没有冲突且rebase成功，则已存在暂存的提交；若上面处理了冲突则已提交
-          # 确保有提交记录后再推送
-          if git log -1 --pretty=format:"%s" | grep -q "Auto update releases.json"; then
-            git push origin HEAD:${{ github.ref_name }}
-          else
-            # 正常情况：rebase后重新生成提交（因为暂存区在rebase后可能被清空，需要再次提交）
-            git add public/releases.json
-            git commit -m "Auto update releases.json $(date +'%Y-%m-%d %H:%M:%S')"
-            git push origin HEAD:${{ github.ref_name }}
-          fi
+          # 推送至触发分支
+          git push origin HEAD:${{ github.ref_name }}
