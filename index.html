@@ -8,10 +8,6 @@
   <style>
     :root {
       --sf-img-1: url("logo.svg");
-    }
-  </style>
-  <style>
-    :root {
       --bg-color: #111;
       --bg-secondary: #222;
       --text-primary: #eee;
@@ -21,8 +17,6 @@
       --scrollbar-thumb-hover: #777;
       --scrollbar-thumb-active: #555;
       --font-family: "Mi Sans", "Segoe UI", "Microsoft YaHei", "PingFang SC", -apple-system, BlinkMacSystemFont, sans-serif;
-      --font-weight: 500;
-      --font-weight-bold: 700;
     }
 
     ::-webkit-scrollbar {
@@ -55,6 +49,7 @@
       background-color: var(--bg-color);
       color: var(--text-primary);
       -webkit-text-size-adjust: 100%;
+      margin: 0 !important;
     }
 
     .bg-ae {
@@ -78,7 +73,7 @@
     .bg-ae text {
       fill: none;
       stroke: currentColor;
-      stroke-width: 1;
+      stroke-width: 1.3;
     }
 
     h1, h2, h3, h4, h5, h6 {
@@ -87,40 +82,6 @@
 
     img {
       max-width: 100%;
-    }
-
-    .slogan {
-      color: #fff;
-      font-family: "Mi Sans", "Segoe UI", "Microsoft YaHei", "PingFang SC", -apple-system, BlinkMacSystemFont, sans-serif;
-      font-size: 70px;
-      font-weight: bold;
-      text-shadow: 10px 10px 20px #111;
-      white-space: nowrap;
-      display: inline-block;
-      animation: blink-caret 0.75s step-end infinite;
-      overflow: hidden;
-      will-change: width;
-      transition: width 1.6s cubic-bezier(0.76, 0, 0.42, 0.99), border-right 0.3s ease;
-    }
-
-    .slogan span {
-      display: inline-block;
-    }
-
-    .slogan.typing-done {
-      border-right: none;
-    }
-
-    @keyframes blink-caret {
-
-      from,
-      to {
-        border-color: transparent;
-      }
-
-      50% {
-        border-color: #0099ff;
-      }
     }
 
     .tab {
@@ -143,7 +104,6 @@
         transform: translateY(-100%);
         opacity: 0;
       }
-
       to {
         transform: translateY(0);
         opacity: 1;
@@ -165,7 +125,6 @@
         opacity: 0;
         transform: translateY(10px);
       }
-
       to {
         opacity: 1;
         transform: translateY(0);
@@ -177,7 +136,6 @@
         opacity: 0;
         transform: translateX(-100%);
       }
-
       to {
         opacity: 1;
         transform: translateX(0);
@@ -221,13 +179,13 @@
       color: #eee;
     }
 
-    .proxy-selector {
+    .proxy-selector, .other-selector {
       position: relative;
       display: inline-block;
       height: 100%;
     }
 
-    .proxy-btn {
+    .proxy-btn, .other-btn {
       background-color: #00000000;
       color: #eee;
       border: 0;
@@ -242,7 +200,7 @@
       font-size: 14px;
     }
 
-    .proxy-btn:hover {
+    .proxy-btn:hover, .other-btn:hover {
       background-color: #333;
     }
 
@@ -255,7 +213,7 @@
       transition: transform 0.3s ease;
     }
 
-    .proxy-menu {
+    .proxy-menu, .other-menu {
       display: none;
       position: absolute;
       top: calc(100% + 5px);
@@ -266,14 +224,17 @@
       box-shadow: 0 8px 32px rgba(0,0,0,0.25);
       border-radius: 10px;
       z-index: 1000;
-      max-height: 220px;
-      overflow-y: auto;
       opacity: 0;
       transform: translateY(-8px);
       transition: all 0.2s ease;
     }
 
-    .proxy-menu.show {
+    .proxy-menu {
+      max-height: 220px;
+      overflow-y: auto;
+    }
+
+    .proxy-menu.show, .other-menu.show {
       display: block;
       opacity: 1;
       transform: translateY(0);
@@ -283,11 +244,11 @@
       padding: 8px 16px;
       font-size: 11px;
       font-weight: 600;
-      color: #888;
+      color: var(--text-secondary);
       text-transform: uppercase;
       letter-spacing: 0.5px;
-      background: rgba(0,0,0,0.2);
-      border-bottom: 1px solid rgba(255,255,255,0.05);
+      background: rgba(0,0,0,0.1);
+      border-bottom: 1px solid rgba(136,136,136,0.1);
     }
 
     .proxy-option {
@@ -320,54 +281,6 @@
       font-size: 11px;
     }
 
-    .other-selector {
-      position: relative;
-      display: inline-block;
-      height: 100%;
-    }
-
-    .other-btn {
-      background-color: #00000000;
-      color: #eee;
-      border: 0;
-      height: 100%;
-      padding: 0 8px;
-      border-radius: 10px;
-      transition: background-color 0.3s ease;
-      cursor: pointer;
-      font-size: 14px;
-      display: flex;
-      align-items: center;
-      gap: 5px;
-    }
-
-    .other-btn:hover {
-      background-color: #333;
-    }
-
-    .other-menu {
-      display: none;
-      position: absolute;
-      top: calc(100% + 5px);
-      right: 0;
-      background: rgba(35,35,35,0.98);
-      backdrop-filter: blur(15px);
-      min-width: 180px;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.25);
-      border-radius: 10px;
-      z-index: 1000;
-      overflow: hidden;
-      opacity: 0;
-      transform: translateY(-8px);
-      transition: all 0.2s ease;
-    }
-
-    .other-menu.show {
-      display: block;
-      opacity: 1;
-      transform: translateY(0);
-    }
-
     .other-menu-section {
       padding: 10px 16px 6px;
       color: #888;
@@ -393,264 +306,9 @@
 
     .other-menu-divider {
       height: 1px;
-      background: rgba(255,255,255,0.06);
-      margin: 4px 0;
-    }
-
-    .daylight-mode {
-      --bg-color: #f8f8f8;
-      --bg-secondary: #f0f0f0;
-      --text-primary: #333;
-      --text-secondary: #666;
-      --scrollbar-thumb: #ccc;
-      --scrollbar-thumb-hover: #bbb;
-      --scrollbar-thumb-active: #aaa;
-    }
-
-    .daylight-mode .bg-ae text {
-      stroke: #333;
-    }
-
-    .daylight-mode .tab {
-      background-color: var(--bg-color);
-      opacity: 0.9;
-      filter: brightness(0.9);
-    }
-
-    .daylight-mode .tabButton {
-      color: #333;
-    }
-
-    .daylight-mode .tabButton:hover {
-      background-color: var(--bg-secondary);
-    }
-
-    .daylight-mode .tabButton a {
-      color: #333;
-    }
-
-    .daylight-mode .download-section {
-      background-color: var(--bg-color);
-    }
-
-    .daylight-mode .download-title {
-      color: var(--text-primary);
-    }
-
-    .daylight-mode .end {
-      background-color: var(--bg-color);
-      opacity: 0.75;
-      filter: brightness(0.9);
-    }
-
-    .daylight-mode .end-copyright {
-      color: var(--text-secondary);
-    }
-
-    .daylight-mode .content {
-      background-color: var(--bg-color);
-    }
-
-    .daylight-mode .page {
-      background-color: var(--bg-color);
-      z-index: 0;
-    }
-
-    .daylight-mode .proxy-btn {
-      color: #333;
-    }
-
-    .daylight-mode .proxy-btn:hover {
-      background-color: var(--bg-secondary);
-    }
-
-    .daylight-mode .proxy-menu {
-      background: var(--bg-color);
-    }
-
-    .daylight-mode .proxy-option {
-      color: #333;
-    }
-
-    .daylight-mode .proxy-option:hover {
-      background: var(--bg-secondary);
-      color: #333;
-    }
-
-    .daylight-mode .proxy-section-title {
-      color: #666;
-      background: rgba(0,0,0,0.05);
-      border-bottom: 1px solid rgba(0,0,0,0.1);
-    }
-
-    .daylight-mode .other-btn {
-      color: #333;
-    }
-
-    .daylight-mode .other-btn:hover {
-      background-color: var(--bg-secondary);
-    }
-
-    .daylight-mode .other-menu {
-      background: var(--bg-color);
-    }
-
-    .daylight-mode .other-menu-section {
-      color: #888;
-    }
-
-    .daylight-mode .other-menu-item {
-      color: #333;
-    }
-
-    .daylight-mode .other-menu-item:hover {
-      background: var(--bg-secondary);
-      color: #333;
-    }
-
-    .daylight-mode .theme-toggle-btn,
-    .daylight-mode #theme-toggle-btn {
-      color: #333;
-    }
-
-    .daylight-mode .titleF {
-      color: #333;
-    }
-
-    .daylight-mode .titleFintor {
-      color: #333;
-    }
-
-    .daylight-mode .featureCard {
-      background-color: var(--bg-secondary);
-      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.075);
-    }
-
-    .daylight-mode .featureCard:hover {
-      background-color: #e0e0e0;
-    }
-
-    .daylight-mode .featureTitle {
-      color: #333;
-    }
-
-    .daylight-mode .featureDesc {
-      color: #666;
-    }
-
-    .daylight-mode .OnlineButton {
-      color: #fff;
-    }
-
-    .daylight-mode .DesktopButton {
-      background-color: #666;
-      color: #fff;
-    }
-
-    .daylight-mode .updateT {
-      color: #333;
-    }
-
-    .daylight-mode .updateTIn {
-      color: #333;
-    }
-
-    .daylight-mode .UpdateC {
-      background-color: rgba(0, 0, 0, 0.05);
-      color: #333;
-    }
-
-    .daylight-mode .backgroundF {
-      display: none;
-    }
-
-    .daylight-mode .slogan {
-      color: #333;
-      text-shadow: 10px 10px 20px rgba(255, 255, 255, 0.5);
-    }
-
-    .daylight-mode .introend,
-    .daylight-mode .endby,
-    .daylight-mode .link {
-      color: #333;
-    }
-
-    .daylight-mode .copyright {
-      color: #666;
-    }
-
-    .daylight-mode .footer {
-      background-color: var(--bg-secondary);
-      color: #333;
-    }
-
-    .daylight-mode .download-card {
-      background-color: var(--bg-secondary);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-    }
-
-    .daylight-mode .download-card:hover {
-      background-color: #e0e0e0;
-    }
-
-    .daylight-mode .download-name {
-      color: #333;
-    }
-
-    .daylight-mode .download-desc {
-      color: #666;
-    }
-
-    .daylight-mode .download-panel {
-      background: linear-gradient(180deg, var(--bg-color) 0%, var(--bg-secondary) 100%);
-    }
-
-    .daylight-mode .download-item {
-      background: var(--bg-secondary);
-    }
-
-    .daylight-mode .download-item-name {
-      color: #333;
-    }
-
-    .daylight-mode .download-item-size {
-      color: #666;
-    }
-
-    .daylight-mode .download-panel-title {
-      color: #666;
-    }
-
-    .daylight-mode .release-selector select {
-      background-color: var(--bg-secondary);
-      color: #333;
-      border-color: #ddd;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
-    }
-
-    .daylight-mode .release-selector select:hover {
-      border-color: var(--accent-color);
-      background-color: rgba(102, 204, 255, 0.08);
-      box-shadow: 0 4px 12px rgba(102, 204, 255, 0.15);
-    }
-
-    .daylight-mode .release-selector select:focus {
-      border-color: var(--accent-color);
-      box-shadow: 0 0 0 3px rgba(102, 204, 255, 0.25);
-      background-color: rgba(102, 204, 255, 0.05);
-    }
-
-    .daylight-mode .release-selector select option {
-      background-color: #f8f9fa;
-      color: #333;
-      padding: 8px 16px;
-      font-size: 14px;
-      font-family: var(--font-family);
-    }
-
-    .daylight-mode .release-selector select option:checked {
-      background-color: rgba(102, 204, 255, 0.15);
-      color: var(--accent-color);
+      background: var(--text-secondary);
+      opacity: 0.2;
+      margin: 6px 16px;
     }
 
     .download-section {
@@ -669,7 +327,7 @@
       font-weight: bold;
       margin-bottom: 50px;
       text-align: center;
-      font-family: "Mi Sans", "Segoe UI", "Microsoft YaHei", "PingFang SC", -apple-system, BlinkMacSystemFont, sans-serif;
+      font-family: var(--font-family);
     }
 
     .download-cards {
@@ -690,7 +348,14 @@
       z-index: 1;
     }
 
-    .release-selector select {
+    .custom-dropdown {
+      position: relative;
+      min-width: 200px;
+      max-width: 300px;
+      width: 100%;
+    }
+
+    .custom-dropdown-button {
       background-color: var(--bg-secondary);
       color: var(--text-primary);
       border: 1px solid var(--scrollbar-thumb);
@@ -701,14 +366,11 @@
       cursor: pointer;
       outline: none;
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      min-width: 200px;
-      max-width: 300px;
       width: 100%;
-      appearance: none;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23888' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
-      background-repeat: no-repeat;
-      background-position: right 15px center;
-      background-size: 16px;
+      text-align: left;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       font-family: var(--font-family);
       line-height: 1.5;
       white-space: nowrap;
@@ -716,47 +378,86 @@
       text-overflow: ellipsis;
     }
 
-    .release-selector select:hover {
+    .custom-dropdown-button:hover {
       border-color: var(--accent-color);
       background-color: rgba(102, 204, 255, 0.1);
       box-shadow: 0 4px 12px rgba(102, 204, 255, 0.15);
     }
 
-    .release-selector select:focus {
+    .custom-dropdown-button:focus {
       border-color: var(--accent-color);
       box-shadow: 0 0 0 3px rgba(102, 204, 255, 0.25);
       background-color: rgba(102, 204, 255, 0.05);
     }
 
-    .release-selector select::-webkit-scrollbar {
+    .custom-dropdown-arrow {
+      font-size: 10px;
+      transition: transform 0.3s ease;
+      color: var(--text-secondary);
+    }
+
+    .custom-dropdown-menu {
+      position: absolute;
+      top: calc(100% + 5px);
+      left: 0;
+      right: 0;
+      background: var(--bg-secondary);
+      backdrop-filter: blur(15px);
+      border-radius: 10px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+      z-index: 1000;
+      max-height: 300px;
+      overflow-y: auto;
+      opacity: 0;
+      transform: translateY(-8px);
+      visibility: hidden;
+      transition: all 0.2s ease;
+    }
+
+    .custom-dropdown-menu.show {
+      opacity: 1;
+      transform: translateY(0);
+      visibility: visible;
+    }
+
+    .custom-dropdown-option {
+      padding: 11px 16px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      color: var(--text-primary);
+      font-size: 14px;
+      font-family: var(--font-family);
+      border-left: 3px solid transparent;
+    }
+
+    .custom-dropdown-option:hover {
+      background: rgba(255,255,255,0.06);
+      color: var(--text-primary);
+      border-left-color: var(--accent-color);
+    }
+
+    .custom-dropdown-option.active {
+      background: rgba(102, 204, 255, 0.12);
+      color: var(--accent-color);
+      border-left-color: var(--accent-color);
+    }
+
+    .custom-dropdown-menu::-webkit-scrollbar {
       width: 8px;
     }
 
-    .release-selector select::-webkit-scrollbar-track {
+    .custom-dropdown-menu::-webkit-scrollbar-track {
       background: var(--bg-color);
       border-radius: 4px;
     }
 
-    .release-selector select::-webkit-scrollbar-thumb {
+    .custom-dropdown-menu::-webkit-scrollbar-thumb {
       background: var(--scrollbar-thumb);
       border-radius: 4px;
     }
 
-    .release-selector select::-webkit-scrollbar-thumb:hover {
+    .custom-dropdown-menu::-webkit-scrollbar-thumb:hover {
       background: var(--scrollbar-thumb-hover);
-    }
-
-    .release-selector select option {
-      background-color: var(--bg-secondary);
-      color: var(--text-primary);
-      padding: 8px 16px;
-      font-size: 14px;
-      font-family: var(--font-family);
-    }
-
-    .release-selector select option:checked {
-      background-color: rgba(102, 204, 255, 0.2);
-      color: var(--accent-color);
     }
 
     .download-card {
@@ -801,14 +502,14 @@
       font-size: 1.3rem;
       font-weight: bold;
       margin-bottom: 10px;
-      font-family: "Mi Sans", "Segoe UI", "Microsoft YaHei", "PingFang SC", -apple-system, BlinkMacSystemFont, sans-serif;
+      font-family: var(--font-family);
     }
 
     .download-desc {
       color: var(--text-secondary);
       font-size: 0.9rem;
       text-align: center;
-      font-family: "Mi Sans", "Segoe UI", "Microsoft YaHei", "PingFang SC", -apple-system, BlinkMacSystemFont, sans-serif;
+      font-family: var(--font-family);
     }
 
     .download-panel {
@@ -930,257 +631,6 @@
       color: #0099ff;
     }
 
-    
-
-    @media (max-width: 768px) {
-      .download-cards {
-        flex-direction: column;
-        align-items: center;
-      }
-
-      .download-card {
-        width: 80%;
-      }
-    }
-
-    .titleShow {
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      padding-top: 100px;
-      padding-bottom: 50px;
-      height: 1000px;
-    }
-
-    .LogoTitle {
-      margin-top: 160px;
-      width: 400px;
-      max-width: 90%;
-      height: auto;
-    }
-
-    .TitleShowPho {
-      width: 70%;
-      max-width: 100%;
-      height: auto;
-      position: relative;
-      left: 0;
-      transform-style: preserve-3d;
-      backface-visibility: hidden;
-      -webkit-backface-visibility: hidden;
-      transition: transform 0.1s ease-out, left 0.3s ease, width 0.3s ease, opacity 0.3s ease;
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
-      border-radius: 12px;
-      will-change: transform;
-      object-fit: contain;
-    }
-
-    .TitleShowPho:hover {
-      transform: rotateX(15deg) translateZ(-10px);
-    }
-
-    .p3d {
-      z-index: -1;
-      position: absolute;
-      perspective: 1200px;
-      width: 80%;
-      max-width: 100%;
-      height: 600px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin-top: 200px;
-      transition: width 0.3s ease, padding-top 0.6s ease;
-    }
-
-    .titleF {
-      color: #eee;
-      display: flex;
-      justify-content: right;
-      font-size: xx-large;
-      font-weight: bold;
-      margin-right: 40px;
-    }
-
-    .titleFintor {
-      color: #eee;
-      display: flex;
-      justify-content: right;
-      font-size: large;
-      margin-right: 80px;
-    }
-
-    .features {
-      height: 800px;
-      z-index: 1;
-    }
-
-    .backgroundF {
-      background-color: #00000055;
-      z-index: -10;
-      width: 100%;
-      height: 880px;
-      margin-top: -80px;
-      position: absolute;
-    }
-
-    .featureCards {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-      margin-top: 50px;
-      padding: 0 40px;
-      position: relative;
-    }
-
-    .featureCard {
-      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
-      background-color: #222;
-      border-radius: 15px;
-      padding: 30px;
-      width: 30%;
-      height: 10px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: flex-end;
-      transition: all 0.3s ease;
-      cursor: pointer;
-      overflow: hidden;
-      position: relative;
-      margin-bottom: 10px;
-      word-wrap: break-word;
-      word-break: break-word;
-      z-index: 2;
-    }
-
-    .featureCard:hover {
-      height: 200px;
-      transform: translateY(-10px);
-      background-color: #2a2a2a;
-      z-index: 10;
-    }
-
-    .featureTitle {
-      color: #eee;
-      font-size: large;
-      font-weight: bold;
-      transition: all 0.3s ease;
-      z-index: 1;
-      text-align: right;
-      position: absolute;
-      right: 30px;
-      top: 50%;
-      transform: translateY(-50%);
-    }
-
-    .featureCard:hover .featureTitle {
-      top: 20px;
-      transform: translateY(0);
-    }
-
-    .featureDesc {
-      color: #aaa;
-      font-size: medium;
-      text-align: left;
-      opacity: 0;
-      transform: translateY(20px);
-      transition: all 0.3s ease;
-      margin-top: 20px;
-      pointer-events: none;
-    }
-
-    .featureCard:hover .featureDesc {
-      opacity: 1;
-      transform: translateY(0);
-      pointer-events: auto;
-    }
-
-    .OnlineButton,
-    .DesktopButton {
-      width: 120px;
-      border: 0;
-      height: 40px;
-      font-size: large;
-      margin: 10px;
-      margin-top: 20px;
-      border-radius: 10px;
-      transition: filter 0.3s ease;
-      min-height: 44px;
-    }
-
-    .OnlineButton {
-      background-color: #0099ff;
-      color: #eee;
-    }
-
-    .DesktopButton {
-      background-color: #111;
-      color: #eee;
-    }
-
-    .OnlineButton:hover,
-    .DesktopButton:hover {
-      filter: brightness(1.2);
-    }
-
-    .OnlineButton:active,
-    .DesktopButton:active {
-      filter: brightness(0.8);
-    }
-
-    .Update {
-      margin-top: 200px;
-      margin-bottom: 500px;
-    }
-
-    .updateT {
-      color: #eee;
-      display: flex;
-      justify-content: center;
-      font-size: xx-large;
-      font-weight: bold;
-    }
-
-    .updateTIn {
-      color: #eee;
-      display: flex;
-      justify-content: center;
-      font-size: large;
-    }
-
-    .UpdateC {
-      position: relative;
-      background-color: #000000bb;
-      border-radius: 10px;
-      color: #eee;
-      justify-content: center;
-      width: 60%;
-      margin: 20px auto;
-      padding-top: 10px;
-      padding-bottom: 10px;
-      font-family: "Mi Sans", "Segoe UI", "Microsoft YaHei", "PingFang SC", -apple-system, BlinkMacSystemFont, sans-serif;
-    }
-
-    .ubgd {
-      width: 100%;
-      margin: 30px auto;
-      display: flex;
-      justify-content: center;
-      position: absolute;
-      z-index: -1;
-    }
-
-    .ubg {
-      width: auto;
-      height: 100%;
-      margin-top: -200px;
-      filter: blur(2px);
-      opacity: 0.8;
-    }
-
     .end {
       padding: 60px;
       padding-bottom: 20px;
@@ -1211,11 +661,7 @@
       margin-top: auto;
       color: var(--text-secondary);
       font-size: 0.9rem;
-      font-family: 'Mi Sans', 'Segoe UI', 'Microsoft YaHei', 'PingFang SC', -apple-system, BlinkMacSystemFont, sans-serif;
-    }
-
-    body {
-      margin: 0 !important;
+      font-family: var(--font-family);
     }
 
     .endlogo {
@@ -1223,19 +669,16 @@
       height: auto;
     }
 
-    .introend,
-    .endby,
-    .link {
+    .introend, .endby, .link {
       color: #eee;
-      font-family: "Mi Sans", "Segoe UI", "Microsoft YaHei", "PingFang SC", -apple-system, BlinkMacSystemFont, sans-serif;
+      font-family: var(--font-family);
     }
 
     .introend {
       font-size: small;
     }
 
-    .endby,
-    .link {
+    .endby, .link {
       font-size: x-large;
     }
 
@@ -1249,7 +692,7 @@
       padding: 20px 0;
       color: #888;
       font-size: 0.9rem;
-      font-family: "Mi Sans", "Segoe UI", "Microsoft YaHei", "PingFang SC", -apple-system, BlinkMacSystemFont, sans-serif;
+      font-family: var(--font-family);
       width: fit-content;
       margin: 0 auto;
       display: block;
@@ -1279,546 +722,6 @@
       font-size: small;
     }
 
-    @media (max-width: 1200px) {
-      .LogoTitle {
-        width: 300px;
-      }
-
-      .featureCard {
-        width: 40%;
-      }
-
-      .featureCard:hover {
-        width: 40%;
-      }
-    }
-
-    @media (max-width: 1024px) {
-      .LogoTitle {
-        width: 250px;
-      }
-
-      .slogan {
-        font-size: 50px;
-      }
-
-      .featureCards {
-        padding: 0 20px;
-      }
-
-      .featureCard {
-        width: 45%;
-      }
-
-      .featureCard:hover {
-        width: 45%;
-      }
-
-      .titleF {
-        font-size: x-large;
-        margin-right: 20px;
-      }
-
-      .titleFintor {
-        margin-right: 40px;
-      }
-    }
-
-    @media (max-width: 768px) {
-      #tabLogo {
-        height: 35px;
-        margin-top: auto;
-        margin-bottom: auto;
-        margin-left: 20px;
-      }
-
-      .tabButtonTab {
-        margin-right: 20px;
-      }
-
-      .tabButton {
-        width: auto;
-        min-width: 50px;
-        font-size: 14px;
-        padding: 0 10px;
-      }
-
-      .slogan {
-        font-size: 36px;
-        width: 100%;
-        text-align: center;
-        margin: 20px 0;
-        word-wrap: break-word;
-      }
-
-      .slogan span {
-        display: inline-block;
-      }
-
-      .LogoTitle {
-        width: 200px;
-        margin-top: 100px;
-      }
-
-      .p3d {
-        width: 90%;
-        margin-top: 100px;
-        height: 400px;
-      }
-
-      .TitleShowPho {
-        width: 100%;
-        height: auto;
-      }
-
-      .titleShow {
-        padding-top: 50px;
-        height: 700px;
-      }
-
-      .OnlineButton,
-      .DesktopButton {
-        width: 100px;
-        font-size: 16px;
-      }
-
-      .features {
-        height: auto;
-        min-height: 600px;
-      }
-
-      .backgroundF {
-        height: 700px;
-        margin-top: -40px;
-      }
-
-      .featureCards {
-        align-items: center;
-      }
-
-      .featureCard {
-        width: 80%;
-        margin: 10px 0;
-      }
-
-      .featureCard:hover {
-        width: 80%;
-        height: auto;
-        min-height: 200px;
-      }
-
-      .featureTitle {
-        transform: none;
-        text-align: center;
-        top: 20px;
-      }
-
-      .featureCard:hover .featureTitle {
-        position: static;
-        top: auto;
-        transform: none;
-      }
-
-      .featureDesc {
-        text-align: center;
-        padding: 0 10px;
-      }
-
-      .titleF {
-        font-size: large;
-        justify-content: center;
-        margin-right: 0;
-      }
-
-      .titleFintor {
-        font-size: medium;
-        justify-content: center;
-        margin-right: 0;
-      }
-
-      .Update {
-        margin-top: 100px;
-        height: auto;
-        min-height: 500px;
-      }
-
-      .updateT {
-        font-size: x-large;
-      }
-
-      .updateTIn {
-        font-size: medium;
-      }
-
-      .ubg {
-        width: 100%;
-        height: auto;
-        max-height: 400px;
-        margin-top: -100px;
-      }
-
-      .end {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-        height: auto;
-        padding: 40px 20px;
-      }
-
-      .endlogo {
-        width: 150px;
-      }
-
-      .link {
-        margin-top: 20px;
-      }
-
-      .download-cards {
-        flex-direction: column;
-        gap: 15px;
-      }
-
-      .download-card {
-        width: 90%;
-        padding: 25px 30px;
-      }
-
-      .download-panel-inner {
-        padding: 0 10px;
-      }
-
-      .filter-tabs {
-        justify-content: center;
-      }
-
-      .filter-tab {
-        padding: 8px 12px;
-        font-size: 12px;
-      }
-
-      .download-item {
-        padding: 12px 10px;
-      }
-
-      .download-item-name {
-        font-size: 14px;
-      }
-
-      .proxy-menu {
-        min-width: 160px;
-        right: -10px;
-      }
-
-      .proxy-option {
-        padding: 12px 14px;
-        font-size: 13px;
-      }
-
-      .tabButton a {
-        font-size: 13px;
-      }
-
-      .other-btn {
-        font-size: 14px;
-        padding: 0 8px;
-      }
-
-      .other-menu {
-        right: -10px;
-        min-width: 160px;
-      }
-
-      .OnlineButton,
-      .DesktopButton {
-        min-height: 48px;
-        padding: 0 20px;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .tab {
-        padding: 8px 0;
-        height: 50px;
-      }
-
-      .tabButtonTab {
-        margin-right: 10px;
-      }
-
-      .tabButton {
-        min-width: 50px;
-        font-size: 12px;
-        padding: 0 5px;
-        width: auto;
-      }
-
-      .slogan {
-        font-size: 24px;
-        line-height: 1.4;
-        text-shadow: 5px 5px 10px #111;
-      }
-
-      .LogoTitle {
-        width: 150px;
-        margin-top: 60px;
-      }
-
-      .p3d {
-        margin-top: 80px;
-        height: 300px;
-      }
-
-      .titleShow {
-        padding-top: 30px;
-        height: 600px;
-        padding-bottom: 20px;
-      }
-
-      .OnlineButton,
-      .DesktopButton {
-        width: 120px;
-        height: 35px;
-        font-size: 14px;
-        margin: 5px;
-      }
-
-      .featureCard {
-        width: 90%;
-        padding: 20px;
-      }
-
-      .featureCard:hover {
-        width: 90%;
-        height: auto;
-        min-height: 150px;
-      }
-
-      .titleF {
-        font-size: medium;
-        padding: 0 10px;
-      }
-
-      .titleFintor {
-        font-size: small;
-        padding: 0 10px;
-      }
-
-      .backgroundF {
-        height: 600px;
-        margin-top: -20px;
-      }
-
-      .features {
-        min-height: 500px;
-      }
-
-      .updateT {
-        font-size: large;
-      }
-
-      .updateTIn {
-        font-size: small;
-      }
-
-      .ubg {
-        margin-top: -80px;
-      }
-
-      .end {
-        padding: 30px 15px;
-      }
-
-      .endlogo {
-        width: 120px;
-      }
-
-      .endby {
-        font-size: medium;
-      }
-
-      .link {
-        font-size: medium;
-      }
-
-      .introend {
-        font-size: 11px;
-        line-height: 1.5;
-      }
-
-      .footerT {
-        font-size: 9px;
-      }
-
-      .download-cards {
-        gap: 12px;
-      }
-
-      .download-card {
-        width: 95%;
-        padding: 20px 25px;
-      }
-
-      .download-name {
-        font-size: 1.1rem;
-      }
-
-      .download-panel {
-        max-height: 400px;
-      }
-
-      .download-panel.show {
-        max-height: 400px;
-        padding: 10px 0;
-      }
-
-      .download-item {
-        padding: 14px 8px;
-        flex-direction: column;
-        gap: 5px;
-      }
-
-      .download-item-info {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 5px;
-      }
-
-      .download-item-name {
-        font-size: 13px;
-        word-break: break-all;
-      }
-
-      .download-item-size {
-        font-size: 11px;
-      }
-
-      .download-btn {
-        width: 100%;
-        padding: 10px;
-        font-size: 13px;
-      }
-
-      .proxy-menu {
-        min-width: 150px;
-        right: -15px;
-      }
-
-      .proxy-option {
-        padding: 13px 12px;
-        font-size: 12px;
-      }
-
-      .tabButton a {
-        font-size: 12px;
-      }
-
-      .OnlineButton,
-      .DesktopButton {
-        width: 130px;
-        height: 44px;
-        font-size: 14px;
-        margin: 8px;
-        min-height: 44px;
-      }
-
-    @media (max-width: 320px) {
-      .slogan {
-        font-size: 20px;
-      }
-
-      .LogoTitle {
-        width: 120px;
-        margin-top: 40px;
-      }
-
-      .p3d {
-        height: 200px;
-      }
-
-      .titleShow {
-        height: 500px;
-      }
-
-      .OnlineButton,
-      .DesktopButton {
-        width: 110px;
-        height: 40px;
-        font-size: 12px;
-        min-height: 40px;
-      }
-
-      .featureCard {
-        width: 95%;
-        padding: 15px;
-      }
-
-      .featureCard:hover {
-        width: 95%;
-      }
-
-      .featureTitle {
-        font-size: 14px;
-      }
-
-      .featureDesc {
-        font-size: 12px;
-      }
-
-      .tabButton a {
-        font-size: 11px;
-      }
-
-      .download-card {
-        width: 98%;
-        padding: 15px 20px;
-      }
-
-      .download-name {
-        font-size: 1rem;
-      }
-
-      .filter-tab {
-        padding: 6px 10px;
-        font-size: 11px;
-      }
-
-      .proxy-menu {
-        min-width: 140px;
-        right: -20px;
-      }
-
-      .proxy-option {
-        padding: 12px 10px;
-        font-size: 11px;
-      }
-
-      .other-btn {
-        font-size: 12px;
-        padding: 0 6px;
-      }
-
-      .other-menu {
-        right: -15px;
-        min-width: 140px;
-      }
-
-      .endlogo {
-        width: 100px;
-      }
-
-      .endby {
-        font-size: small;
-      }
-
-      .link {
-        font-size: small;
-      }
-    }
-  </style>
-  
-  <link rel="canonical" href="https://editors.astras.top/">
-  <meta http-equiv="content-security-policy" content="default-src 'none'; connect-src 'self'; font-src 'self' data:; img-src 'self' data:; style-src 'unsafe-inline'; media-src 'self' data:; script-src 'unsafe-inline' data:; object-src 'self' data:; frame-src 'self' data:;">
-  <style>
     .loading {
       position: fixed;
       display: flex;
@@ -1827,7 +730,7 @@
       left: 0;
       width: 100%;
       height: 100vh;
-      background-color: #f7f7f7;
+      background-color: var(--bg-color);
       z-index: 100000000;
       transition: 1s ease;
       justify-content: center;
@@ -1843,7 +746,7 @@
 
     .loading svg circle {
       fill: none;
-      stroke: #171717;
+      stroke: var(--text-primary);
       stroke-width: 12;
       stroke-dasharray: 160;
       stroke-dashoffset: 160;
@@ -1865,7 +768,7 @@
     .loading p {
       font-family: sans-serif;
       font-size: 2rem;
-      color: #171717;
+      color: var(--text-primary);
       font-weight: 900;
       transition: 0.3s ease;
     }
@@ -1874,8 +777,7 @@
       transform: translateY(100%);
     }
 
-    .loading_out svg,
-    .loading_out p {
+    .loading_out svg, .loading_out p {
       opacity: 0;
     }
 
@@ -1927,7 +829,407 @@
       border-bottom-style: solid;
       border-right-style: solid;
     }
+
+    .daylight-mode {
+      --bg-color: #f8f8f8;
+      --bg-secondary: #f0f0f0;
+      --text-primary: #333;
+      --text-secondary: #666;
+      --scrollbar-thumb: #ccc;
+      --scrollbar-thumb-hover: #bbb;
+      --scrollbar-thumb-active: #aaa;
+    }
+
+    .daylight-mode .bg-ae text {
+      stroke: #333;
+    }
+
+    .daylight-mode .tab {
+      background-color: var(--bg-color);
+      opacity: 0.9;
+      filter: brightness(0.9);
+    }
+
+    .daylight-mode .tabButton {
+      color: #333;
+    }
+
+    .daylight-mode .tabButton:hover {
+      background-color: var(--bg-secondary);
+    }
+
+    .daylight-mode .tabButton a {
+      color: #333;
+    }
+
+    .daylight-mode .download-section {
+      background-color: var(--bg-color);
+    }
+
+    .daylight-mode .download-title {
+      color: var(--text-primary);
+    }
+
+    .daylight-mode .end {
+      background-color: var(--bg-color);
+      opacity: 0.75;
+      filter: brightness(0.9);
+    }
+
+    .daylight-mode .end-copyright {
+      color: var(--text-secondary);
+    }
+
+    .daylight-mode .content {
+      background-color: var(--bg-color);
+    }
+
+    .daylight-mode .page {
+      background-color: var(--bg-color);
+      z-index: 0;
+    }
+
+    .daylight-mode .proxy-btn, .daylight-mode .other-btn {
+      color: #333;
+    }
+
+    .daylight-mode .proxy-btn:hover, .daylight-mode .other-btn:hover {
+      background-color: var(--bg-secondary);
+    }
+
+    .daylight-mode .proxy-menu, .daylight-mode .other-menu {
+      background: var(--bg-color);
+    }
+
+    .daylight-mode .proxy-option, .daylight-mode .other-menu-item {
+      color: #333;
+    }
+
+    .daylight-mode .proxy-option:hover, .daylight-mode .other-menu-item:hover {
+      background: var(--bg-secondary);
+      color: #333;
+    }
+
+    .daylight-mode .proxy-section-title {
+      color: #666;
+      background: rgba(0,0,0,0.05);
+      border-bottom: 1px solid rgba(0,0,0,0.1);
+    }
+
+    .daylight-mode .other-menu-section {
+      color: #888;
+    }
+
+    .daylight-mode .theme-toggle-btn, .daylight-mode #theme-toggle-btn {
+      color: #333;
+    }
+
+    .daylight-mode .download-card {
+      background-color: var(--bg-secondary);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.075);
+    }
+
+    .daylight-mode .download-card:hover {
+      background-color: #e0e0e0;
+    }
+
+    .daylight-mode .download-name {
+      color: #333;
+    }
+
+    .daylight-mode .download-desc {
+      color: #666;
+    }
+
+    .daylight-mode .download-panel {
+      background: linear-gradient(180deg, var(--bg-color) 0%, var(--bg-secondary) 100%);
+    }
+
+    .daylight-mode .download-item {
+      background: var(--bg-secondary);
+    }
+
+    .daylight-mode .download-item-name {
+      color: #333;
+    }
+
+    .daylight-mode .download-item-size {
+      color: #666;
+    }
+
+    .daylight-mode .download-panel-title {
+      color: #666;
+    }
+
+    @media (max-width: 768px) {
+      .download-cards {
+        flex-direction: column;
+        align-items: center;
+      }
+      .download-card {
+        width: 80%;
+      }
+      .tabButtonTab {
+        margin-right: 20px;
+      }
+      .tabButton {
+        width: auto;
+        min-width: 50px;
+        font-size: 14px;
+        padding: 0 10px;
+      }
+      .end {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        height: auto;
+        padding: 40px 20px;
+      }
+      .endlogo {
+        width: 150px;
+      }
+      .link {
+        margin-top: 20px;
+      }
+      .download-panel-inner {
+        padding: 0 10px;
+      }
+      .filter-tabs {
+        justify-content: center;
+      }
+      .filter-tab {
+        padding: 8px 12px;
+        font-size: 12px;
+      }
+      .download-item {
+        padding: 12px 10px;
+      }
+      .download-item-name {
+        font-size: 14px;
+      }
+      .proxy-menu {
+        min-width: 160px;
+        right: -10px;
+      }
+      .proxy-option {
+        padding: 12px 14px;
+        font-size: 13px;
+      }
+      .tabButton a {
+        font-size: 13px;
+      }
+      .other-btn {
+        font-size: 14px;
+        padding: 0 8px;
+      }
+      .other-menu {
+        right: -10px;
+        min-width: 160px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .tab {
+        padding: 8px 0;
+        height: 50px;
+      }
+      .tabButtonTab {
+        margin-right: 10px;
+      }
+      .tabButton {
+        min-width: 50px;
+        font-size: 12px;
+        padding: 0 5px;
+        width: auto;
+      }
+      .LogoTitle {
+        width: 150px;
+        margin-top: 60px;
+      }
+      .p3d {
+        margin-top: 80px;
+        height: 300px;
+      }
+      .titleShow {
+        padding-top: 30px;
+        height: 600px;
+        padding-bottom: 20px;
+      }
+      .featureCard {
+        width: 90%;
+        padding: 20px;
+      }
+      .featureCard:hover {
+        width: 90%;
+        height: auto;
+        min-height: 150px;
+      }
+      .titleF {
+        font-size: medium;
+        padding: 0 10px;
+      }
+      .titleFintor {
+        font-size: small;
+        padding: 0 10px;
+      }
+      .backgroundF {
+        height: 600px;
+        margin-top: -20px;
+      }
+      .features {
+        min-height: 500px;
+      }
+      .updateT {
+        font-size: large;
+      }
+      .updateTIn {
+        font-size: small;
+      }
+      .ubg {
+        margin-top: -80px;
+      }
+      .end {
+        padding: 30px 15px;
+      }
+      .endlogo {
+        width: 120px;
+      }
+      .endby {
+        font-size: medium;
+      }
+      .link {
+        font-size: medium;
+      }
+      .introend {
+        font-size: 11px;
+        line-height: 1.5;
+      }
+      .footerT {
+        font-size: 9px;
+      }
+      .download-cards {
+        gap: 12px;
+      }
+      .download-card {
+        width: 95%;
+        padding: 20px 25px;
+      }
+      .download-name {
+        font-size: 1.1rem;
+      }
+      .download-panel {
+        max-height: 400px;
+      }
+      .download-panel.show {
+        max-height: 400px;
+        padding: 10px 0;
+      }
+      .download-item {
+        padding: 14px 8px;
+        flex-direction: column;
+        gap: 5px;
+      }
+      .download-item-info {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+      }
+      .download-item-name {
+        font-size: 13px;
+        word-break: break-all;
+      }
+      .download-item-size {
+        font-size: 11px;
+      }
+      .download-btn {
+        width: 100%;
+        padding: 10px;
+        font-size: 13px;
+      }
+      .proxy-menu {
+        min-width: 150px;
+        right: -15px;
+      }
+      .proxy-option {
+        padding: 13px 12px;
+        font-size: 12px;
+      }
+      .tabButton a {
+        font-size: 12px;
+      }
+    }
+
+    @media (max-width: 320px) {
+      .slogan {
+        font-size: 20px;
+      }
+      .LogoTitle {
+        width: 120px;
+        margin-top: 40px;
+      }
+      .p3d {
+        height: 200px;
+      }
+      .titleShow {
+        height: 500px;
+      }
+      .featureCard {
+        width: 95%;
+        padding: 15px;
+      }
+      .featureCard:hover {
+        width: 95%;
+      }
+      .featureTitle {
+        font-size: 14px;
+      }
+      .featureDesc {
+        font-size: 12px;
+      }
+      .tabButton a {
+        font-size: 11px;
+      }
+      .download-card {
+        width: 98%;
+        padding: 15px 20px;
+      }
+      .download-name {
+        font-size: 1rem;
+      }
+      .filter-tab {
+        padding: 6px 10px;
+        font-size: 11px;
+      }
+      .proxy-menu {
+        min-width: 140px;
+        right: -20px;
+      }
+      .proxy-option {
+        padding: 12px 10px;
+        font-size: 11px;
+      }
+      .other-btn {
+        font-size: 12px;
+        padding: 0 6px;
+      }
+      .other-menu {
+        right: -15px;
+        min-width: 140px;
+      }
+      .endlogo {
+        width: 100px;
+      }
+      .endby {
+        font-size: small;
+      }
+      .link {
+        font-size: small;
+      }
+    }
   </style>
+  
+  <link rel="canonical" href="https://editors.astras.top/">
+  <meta http-equiv="content-security-policy" content="default-src 'none'; connect-src 'self'; font-src 'self' data:; img-src 'self' data:; style-src 'unsafe-inline'; media-src 'self' data:; script-src 'unsafe-inline' data:; object-src 'self' data:; frame-src 'self' data:;">
 </head>
 
 <body onload="initPointer()">
@@ -1972,6 +1274,13 @@
           </div>
           <div class="other-menu-item" onclick="animateToPage('https://astras.ct.ws/')">
             <span data-i18n="友情下载站">友情下载站</span>
+          </div>
+          <div class="other-menu-divider"></div>
+          <div class="other-menu-item" onclick="resetAutoTheme()">
+            <span data-i18n="自动主题">自动主题</span>
+          </div>
+          <div class="other-menu-item" onclick="resetAutoLang()">
+            <span data-i18n="自动语言">自动语言</span>
           </div>
         </div>
       </div>
@@ -2023,24 +1332,30 @@
     move(e) {
       let x = e.clientX;
       let y = e.clientY;
-      if (this.current_target) {
+      if (this.current_target && this.current_target.isConnected) {
         const rect = this.current_target.getBoundingClientRect();
-        const center_x = rect.left + rect.width / 2;
-        const center_y = rect.top + rect.height / 2;
-        x = center_x + (x - center_x) * 0.05;
-        y = center_y + (y - center_y) * 0.05;
+        if (rect.width > 0 && rect.height > 0) {
+          const center_x = rect.left + rect.width / 2;
+          const center_y = rect.top + rect.height / 2;
+          x = center_x + (x - center_x) * 0.5;
+          y = center_y + (y - center_y) * 0.5;
+        } else {
+          this.current_target = null;
+          this.container.style.setProperty("--width", "2.5rem");
+          this.container.style.setProperty("--height", "2.5rem");
+        }
       }
       this.container.style.transform = `translate(${x}px, ${y}px)`;
     },
     bind_targets_events() {
-      const targets = document.querySelectorAll("a, button, select, .featureCard, .OnlineButton, .DesktopButton, .tabButton, .download-card, .download-item, .proxy-option, .other-menu-item");
+      const targets = document.querySelectorAll("a, button, select, .featureCard, .OnlineButton, .DesktopButton, .tabButton, .download-card, .download-item, .proxy-option, .other-menu-item, .custom-dropdown-button, .custom-dropdown-option");
       targets.forEach(ele => {
         ele.classList.add("magnetic-target");
         ele.onmouseenter = () => {
           this.current_target = ele;
           const rect = ele.getBoundingClientRect();
-          this.container.style.setProperty("--width", rect.width + innerWidth / 50 + "px");
-          this.container.style.setProperty("--height", rect.height + innerWidth / 50 + "px");
+          this.container.style.setProperty("--width", rect.width + 10 + "px");
+          this.container.style.setProperty("--height", rect.height + 10 + "px");
         };
         ele.onmouseleave = () => {
           this.current_target = null;
@@ -2486,7 +1801,7 @@
     
     results.sort((a, b) => a.latency - b.latency);
     
-    return results[0] && results[0].latency < Infinity ? results[0].proxy : 'ghproxy.net';
+    return results[0] && results[0].latency< Infinity ? results[0].proxy : 'ghproxy.net';
   }
 
   async function autoSelectFastestProxy() {
@@ -2558,6 +1873,17 @@
     if (menu) menu.classList.toggle('show');
   }
 
+  function toggleReleaseDropdown() {
+    const menu = document.getElementById('release-dropdown-menu');
+    if (menu) menu.classList.toggle('show');
+  }
+
+  function selectReleaseOption(index) {
+    changeRelease(index);
+    const menu = document.getElementById('release-dropdown-menu');
+    if (menu) menu.classList.remove('show');
+  }
+
   function selectProxy(proxyName) {
     if (proxyName === 'auto') {
       autoSelectFastestProxy();
@@ -2581,12 +1907,14 @@
   function toggleTheme() {
     currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
     localStorage.setItem('selectedTheme', currentTheme);
+    localStorage.setItem('themeAutoDetect', 'false');
     applyTheme();
   }
 
   function toggleLang() {
     currentLang = currentLang === 'zh' ? 'en' : 'zh';
     localStorage.setItem('selectedLang', currentLang);
+    localStorage.setItem('langAutoDetect', 'false');
     applyLang();
   }
 
@@ -2638,7 +1966,9 @@
       'pkg': '.pkg',
       'EN': 'EN',
       '中文': '中文',
-      '位置权限提示': '当前可能并未获取到位置权限，将无法自动匹配最优代理！'
+      '位置权限提示': '当前可能并未获取到位置权限，将无法自动匹配最优代理！',
+      '自动主题': '自动主题',
+      '自动语言': '自动语言'
     },
     en: {
       '官网': 'Official Website',
@@ -2687,7 +2017,9 @@
       'pkg': '.pkg',
       'EN': 'EN',
       '中文': 'Chinese',
-      '位置权限提示': 'Location permission may not be granted! Auto-match may not work.'
+      '位置权限提示': 'Location permission may not be granted! Auto-match may not work.',
+      '自动主题': 'Auto Theme',
+      '自动语言': 'Auto Language'
     }
   };
 
@@ -2733,6 +2065,48 @@
     }
   }
 
+  function autoDetectTheme() {
+    const autoDetect = localStorage.getItem('themeAutoDetect') !== 'false';
+    if (autoDetect) {
+      const hour = new Date().getHours();
+      if (hour >= 6 && hour< 18) {
+        currentTheme = 'light';
+      } else {
+        currentTheme = 'dark';
+      }
+      localStorage.setItem('selectedTheme', currentTheme);
+      localStorage.setItem('themeAutoDetect', 'true');
+      applyTheme();
+    }
+  }
+
+  function autoDetectLang() {
+    const autoDetect = localStorage.getItem('langAutoDetect') !== 'false';
+    if (autoDetect) {
+      const userLang = navigator.language || navigator.userLanguage;
+      if (userLang.startsWith('zh')) {
+        currentLang = 'zh';
+      } else {
+        currentLang = 'en';
+      }
+      localStorage.setItem('selectedLang', currentLang);
+      localStorage.setItem('langAutoDetect', 'true');
+      applyLang();
+    }
+  }
+
+  function resetAutoTheme() {
+    localStorage.removeItem('selectedTheme');
+    localStorage.removeItem('themeAutoDetect');
+    autoDetectTheme();
+  }
+
+  function resetAutoLang() {
+    localStorage.removeItem('selectedLang');
+    localStorage.removeItem('langAutoDetect');
+    autoDetectLang();
+  }
+
   let allReleases = [];
   let currentReleaseIndex = 0;
 
@@ -2757,7 +2131,7 @@
   }
 
   async function loadReleaseData(releaseIndex) {
-    if (releaseIndex < 0 || releaseIndex >= allReleases.length) {
+    if (releaseIndex< 0 || releaseIndex >= allReleases.length) {
       return;
     }
 
@@ -2790,12 +2164,20 @@
     downloadData = categorized;
 
     let html = '<div class="release-selector">';
-    html += '<select id="release-select" onchange="changeRelease(this.value)">';
+    html += '<div class="custom-dropdown">';
+    html += `<button class="custom-dropdown-button" onclick="toggleReleaseDropdown()">`;
+    html += `<span>${allReleases[releaseIndex].tag_name} (${new Date(allReleases[releaseIndex].published_at).toLocaleDateString()})</span>`;
+    html += `<span class="custom-dropdown-arrow">▼</span>`;
+    html += `</button>`;
+    html += `<div class="custom-dropdown-menu" id="release-dropdown-menu">`;
     allReleases.forEach((rel, index) => {
-      html += `<option value="${index}" ${index === releaseIndex ? 'selected' : ''}>${rel.tag_name} (${new Date(rel.published_at).toLocaleDateString()})</option>`;
+      html += `<div class="custom-dropdown-option ${index === releaseIndex ? 'active' : ''}" onclick="selectReleaseOption(${index})">`;
+      html += `${rel.tag_name} (${new Date(rel.published_at).toLocaleDateString()})`;
+      html += `</div>`;
     });
-    html += '</select>';
-    html += '</div>';
+    html += `</div>`;
+    html += `</div>`;
+    html += `</div>`;
 
     const cards = [
       { key: 'windows', name: translations[currentLang]['Windows 下载'], assets: categorized.windows },
@@ -2806,7 +2188,7 @@
 
     let delay = 0.1;
     cards.forEach(card => {
-      if (card.assets.length > 0 || card.key === 'source') {
+      if (card.assets.length >0 || card.key === 'source') {
         html += `<div class="download-card fade-in-up magnetic-target" style="animation-delay: ${delay}s" onclick="switchPlatform('${card.key}')">`;
         html += `<div class="download-name" data-i18n="${card.key === 'source' ? '源码' : ''}">${card.name}</div>`;
         html += '</div>';
@@ -2829,12 +2211,25 @@
 
   function changeRelease(releaseIndex) {
     loadReleaseData(parseInt(releaseIndex));
+    if (pointer && pointer.current_target) {
+      pointer.current_target = null;
+      pointer.container.style.setProperty("--width", "2.5rem");
+      pointer.container.style.setProperty("--height", "2.5rem");
+    }
   }
 
   document.addEventListener('DOMContentLoaded', function() {
     initProxyMenu();
-    applyTheme();
-    applyLang();
+    if (!localStorage.getItem('selectedTheme')) {
+      autoDetectTheme();
+    } else {
+      applyTheme();
+    }
+    if (!localStorage.getItem('selectedLang')) {
+      autoDetectLang();
+    } else {
+      applyLang();
+    }
     showLocationPermissionWarning();
     selectOptimalProxyByLocation();
     loadDownloadsWithProxy();
@@ -2850,6 +2245,9 @@
     }
     if (!event.target.closest('.other-selector')) {
       document.querySelectorAll('.other-menu.show').forEach(el => el.classList.remove('show'));
+    }
+    if (!event.target.closest('.custom-dropdown')) {
+      document.querySelectorAll('.custom-dropdown-menu.show').forEach(el => el.classList.remove('show'));
     }
     if (!event.target.closest('.download-card') && !event.target.closest('.download-panel')) {
       hideDownloadPanel();
@@ -2885,7 +2283,7 @@
       );
       const scrollableHeight = documentHeight - windowHeight;
       
-      if (scrollableHeight > 0) {
+      if (scrollableHeight >0) {
         const scrollProgress = scrollY / scrollableHeight;
         
         const translateX = (scrollProgress * 2 - 1) * 27;
@@ -2897,6 +2295,4 @@
 
     window.addEventListener('scroll', handleScroll);
     handleScroll();
-  }</script>
-</body>
-</html>
+  }
