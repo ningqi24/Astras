@@ -651,6 +651,358 @@
       gap: 30px;
       max-width: 1000px;
       z-index: -1;
+      margin-bottom: 50px;
+    }
+
+    .tools-panel {
+      width: 100%;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 28px 32px;
+      background-color: rgba(34, 34, 34, 0.4);
+      border: 1px solid var(--scrollbar-thumb);
+      border-radius: 16px;
+      backdrop-filter: blur(10px);
+      animation: fadeInUp 0.6s ease-out 0.2s both;
+    }
+
+    .github-proxy-section {
+      margin-top: 0;
+      margin-bottom: 24px;
+      width: 100%;
+      max-width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      animation: none;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .github-proxy-title {
+      color: var(--text-primary);
+      font-size: 1.3rem;
+      font-weight: bold;
+      margin-bottom: 20px;
+      text-align: center;
+      font-family: var(--font-family);
+    }
+
+    .github-proxy-container {
+      position: relative;
+      display: flex;
+      align-items: center;
+      width: 100%;
+      max-width: 560px;
+      background-color: var(--bg-secondary);
+      border: 2px solid var(--scrollbar-thumb);
+      border-radius: 28px;
+      padding: 6px;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .github-proxy-container:hover,
+    .github-proxy-container:focus-within {
+      border-color: var(--accent-color);
+      box-shadow: 0 6px 20px rgba(102, 204, 255, 0.2);
+    }
+
+    .github-url-input {
+      flex: 1;
+      background: transparent;
+      border: none;
+      outline: none;
+      color: var(--text-primary);
+      font-size: 15px;
+      font-family: var(--font-family);
+      font-weight: 500;
+      padding: 12px 20px;
+      min-width: 0;
+    }
+
+    .github-url-input::placeholder {
+      color: var(--text-secondary);
+      opacity: 0.7;
+    }
+
+    .github-proxy-btn {
+      width: 44px;
+      height: 44px;
+      min-width: 44px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #66ccff 0%, #3399ff 100%);
+      border: none;
+      color: white;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 4px 12px rgba(102, 204, 255, 0.4);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .github-proxy-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg, transparent 0%, rgba(255, 255, 255, 0.2) 100%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .github-proxy-btn:hover {
+      transform: scale(1.08);
+      box-shadow: 0 6px 20px rgba(102, 204, 255, 0.5);
+    }
+
+    .github-proxy-btn:hover::before {
+      opacity: 1;
+    }
+
+    .github-proxy-btn:active {
+      transform: scale(0.95);
+    }
+
+    .github-proxy-message {
+      margin-top: 15px;
+      padding: 12px 20px;
+      border-radius: 10px;
+      font-size: 14px;
+      font-family: var(--font-family);
+      text-align: center;
+      max-width: 100%;
+      word-break: break-word;
+      opacity: 0;
+      transform: translateY(-10px);
+      transition: all 0.3s ease;
+    }
+
+    .github-proxy-message.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .github-proxy-message.error {
+      background-color: rgba(255, 82, 82, 0.15);
+      color: #ff5252;
+      border: 1px solid rgba(255, 82, 82, 0.3);
+    }
+
+    .github-proxy-message.success {
+      background-color: rgba(105, 240, 174, 0.15);
+      color: #69f0ae;
+      border: 1px solid rgba(105, 240, 174, 0.3);
+    }
+
+    .download-tips {
+      margin-top: 0;
+      margin-bottom: 0;
+      width: 100%;
+      max-width: 100%;
+      background-color: rgba(102, 204, 255, 0.05);
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid rgba(102, 204, 255, 0.15);
+      transition: all 0.3s ease;
+      animation: none;
+    }
+
+    .download-tips:hover {
+      border-color: var(--accent-color);
+      background-color: rgba(102, 204, 255, 0.08);
+    }
+
+    .tips-header {
+      display: flex;
+      align-items: center;
+      padding: 16px 20px;
+      cursor: pointer;
+      user-select: none;
+      gap: 12px;
+      transition: background-color 0.2s ease;
+    }
+
+    .tips-header:hover {
+      background-color: rgba(102, 204, 255, 0.08);
+    }
+
+    .tips-icon {
+      color: var(--accent-color);
+      flex-shrink: 0;
+    }
+
+    .tips-title {
+      flex: 1;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text-primary);
+      font-family: var(--font-family);
+    }
+
+    .tips-arrow {
+      color: var(--text-secondary);
+      transition: transform 0.3s ease;
+      flex-shrink: 0;
+    }
+
+    .download-tips.expanded .tips-arrow {
+      transform: rotate(180deg);
+    }
+
+    .tips-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), padding 0.4s ease;
+      padding: 0 20px;
+      opacity: 0;
+    }
+
+    .download-tips.expanded .tips-content {
+      max-height: 500px;
+      padding: 0 20px 20px;
+      opacity: 1;
+    }
+
+    .tips-text {
+      font-size: 14px;
+      line-height: 1.7;
+      color: var(--text-secondary);
+      margin-bottom: 12px;
+      font-family: var(--font-family);
+    }
+
+    .tips-item {
+      background-color: rgba(102, 204, 255, 0.08);
+      border-left: 3px solid var(--accent-color);
+      padding: 12px 16px;
+      margin-bottom: 10px;
+      border-radius: 6px;
+      font-size: 13.5px;
+      color: var(--text-primary);
+      font-family: var(--font-family);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .tips-item strong {
+      color: var(--accent-color);
+      font-weight: 600;
+    }
+
+    .tips-item code {
+      background-color: rgba(0, 0, 0, 0.25);
+      padding: 6px 10px;
+      border-radius: 5px;
+      font-family: "Consolas", "Monaco", "Courier New", monospace;
+      font-size: 12.5px;
+      color: #66ccff;
+      word-break: break-all;
+      border: 1px solid rgba(102, 204, 255, 0.2);
+    }
+
+    .daylight-mode .download-tips {
+      background-color: rgba(102, 204, 255, 0.04);
+      border-color: rgba(102, 204, 255, 0.2);
+    }
+
+    .daylight-mode .tips-text {
+      color: #555;
+    }
+
+    .daylight-mode .tips-item {
+      background-color: rgba(102, 204, 255, 0.06);
+    }
+
+    .daylight-mode .tips-item code {
+      background-color: #f5f5f5;
+      color: #0066cc;
+      border-color: rgba(0, 102, 204, 0.15);
+    }
+
+    @media (max-width: 600px) {
+      .tools-panel {
+        padding: 20px 16px;
+        margin-left: 10px;
+        margin-right: 10px;
+      }
+
+      .github-proxy-container {
+        max-width: 100%;
+      }
+      
+      .tips-header {
+        padding: 14px 16px;
+      }
+
+      .tips-title {
+        font-size: 14px;
+      }
+
+      .github-proxy-title {
+        font-size: 1.15rem;
+      }
+
+      .tips-item code {
+        font-size: 11.5px;
+      }
+    }
+
+    .daylight-mode .tools-panel {
+      background-color: rgba(255, 255, 255, 0.6);
+      border-color: #e0e0e0;
+    }
+
+    .daylight-mode .github-proxy-section {
+      background-color: transparent;
+    }
+
+    .daylight-mode .github-proxy-title {
+      color: var(--text-primary);
+    }
+
+    .daylight-mode .github-proxy-container {
+      background-color: #fff;
+      border-color: #ddd;
+    }
+
+    .daylight-mode .github-proxy-container:hover,
+    .daylight-mode .github-proxy-container:focus-within {
+      border-color: var(--accent-color);
+      box-shadow: 0 6px 20px rgba(102, 204, 255, 0.25);
+    }
+
+    .daylight-mode .github-url-input {
+      color: #333;
+    }
+
+    .daylight-mode .github-url-input::placeholder {
+      color: #999;
+    }
+
+    @media (max-width: 600px) {
+      .github-proxy-container {
+        max-width: 100%;
+      }
+      
+      .github-proxy-title {
+        font-size: 1.25rem;
+      }
     }
 
     .release-selector {
@@ -2013,6 +2365,47 @@
         <h2 class="download-title">Download AstraEditor</h2>
         <div class="download-cards" id="download-cards">
         </div>
+        <div class="tools-panel">
+          <div class="github-proxy-section">
+            <h3 class="github-proxy-title" data-i18n="Github下载-代理">Github下载-代理</h3>
+            <div class="github-proxy-container">
+              <input type="text" id="github-url-input" class="github-url-input" placeholder="https://github.com/owner/repo">
+              <button id="github-proxy-btn" class="github-proxy-btn magnetic-target" onclick="proxyDownloadGithub()">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                  <polyline points="7 10 12 15 17 10"></polyline>
+                  <line x1="12" y1="15" x2="12" y2="3"></line>
+                </svg>
+              </button>
+            </div>
+            <div id="github-proxy-message" class="github-proxy-message"></div>
+          </div>
+          <div class="download-tips">
+            <div class="tips-header magnetic-target" onclick="toggleTips()">
+              <svg class="tips-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" y1="16" x2="12" y2="12"></line>
+                <line x1="12" y1="8" x2="12.01" y2="8"></line>
+              </svg>
+              <span class="tips-title" data-i18n="下载提速小贴士">下载提速小贴士</span>
+              <svg class="tips-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </div>
+            <div class="tips-content" id="tips-content">
+              <p class="tips-text" data-i18n="建议开启Chrome和Edge的多线程下载功能">建议开启 Chrome 和 Edge 的多线程下载功能（Parallel downloading）从而提高浏览器的下载效率</p>
+              <div class="tips-item">
+                <strong data-i18n="Chrome浏览器">Chrome 浏览器：</strong>
+                <code>chrome://flags/#enable-parallel-downloading</code>
+              </div>
+              <div class="tips-item">
+                <strong data-i18n="Edge新版浏览器">Edge 新版浏览器：</strong>
+                <code>edge://flags/#enable-parallel-downloading</code>
+              </div>
+              <p class="tips-text" data-i18n="在下方里找到Parallel downloading">在下方里找到"Parallel downloading"，将默认的"Default"更改为"Enabled"，最后点击右下角弹出的"重启"按钮即可。</p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     <div class="page" id="page-changelog" data-page="changelog" style="display:none;animation:0.4s ease-out 0s 1 normal none running fadeIn"></div>
@@ -2040,13 +2433,67 @@
   const pointer = {
     container: document.querySelector(".pointer"),
     current_target: null,
+    lastX: 0,
+    lastY: 0,
+    isScrolling: false,
+    scrollTimeout: null,
+    rafId: null,
+    isRunning: false,
     init() {
-      window.addEventListener("mousemove", this.move.bind(this));
+      document.addEventListener("mousemove", this.onMouseMove.bind(this), { passive: true });
+      document.addEventListener("scroll", this.onScroll.bind(this), { passive: true, capture: true });
+      document.addEventListener("mousedown", this.onMouseDown.bind(this), { passive: true });
+      document.addEventListener("mouseup", this.onMouseUp.bind(this), { passive: true });
+      window.addEventListener("resize", this.onResize.bind(this), { passive: true });
       this.bind_targets_events();
+      this.startLoop();
     },
-    move(e) {
-      let x = e.clientX;
-      let y = e.clientY;
+    startLoop() {
+      if (this.isRunning) return;
+      this.isRunning = true;
+      const loop = () => {
+        if (!this.isRunning) return;
+        this.updatePosition();
+        this.rafId = requestAnimationFrame(loop);
+      };
+      this.rafId = requestAnimationFrame(loop);
+    },
+    stopLoop() {
+      this.isRunning = false;
+      if (this.rafId) {
+        cancelAnimationFrame(this.rafId);
+        this.rafId = null;
+      }
+    },
+    onMouseMove(e) {
+      this.lastX = e.clientX;
+      this.lastY = e.clientY;
+    },
+    onMouseDown(e) {
+      const target = e.target;
+      if (target && (
+        target === document.documentElement ||
+        target === document.body ||
+        window.getComputedStyle(target).overflow === 'scroll' ||
+        window.getComputedStyle(target).overflowY === 'scroll' ||
+        window.getComputedStyle(target).overflowX === 'scroll' ||
+        target.closest('.custom-dropdown-menu') !== null
+      )) {
+        const rect = target.getBoundingClientRect();
+        const isNearScrollbarX = Math.abs(e.clientX - rect.right) < 20 && rect.height > window.innerHeight;
+        const isNearScrollbarY = Math.abs(e.clientY - rect.bottom) < 20 && rect.width > window.innerWidth;
+        if (isNearScrollbarX || isNearScrollbarY || target === document.documentElement || target === document.body) {
+          this.isScrolling = true;
+        }
+      }
+    },
+    onMouseUp() {
+      this.isScrolling = false;
+    },
+    updatePosition() {
+      let x = this.lastX;
+      let y = this.lastY;
+      if (x === 0 && y === 0) return;
       if (this.current_target && this.current_target.isConnected) {
         const rect = this.current_target.getBoundingClientRect();
         if (rect.width > 0 && rect.height > 0) {
@@ -2062,8 +2509,26 @@
       }
       this.container.style.transform = `translate(${x}px, ${y}px)`;
     },
+    onScroll() {
+      this.isScrolling = true;
+      if (this.scrollTimeout) clearTimeout(this.scrollTimeout);
+      this.scrollTimeout = setTimeout(() => {
+        this.isScrolling = false;
+      }, 150);
+      if (this.current_target && this.current_target.isConnected) {
+        const rect = this.current_target.getBoundingClientRect();
+        if (rect.width <= 0 || rect.height <= 0) {
+          this.current_target = null;
+          this.container.style.setProperty("--width", "2.5rem");
+          this.container.style.setProperty("--height", "2.5rem");
+        }
+      }
+    },
+    onResize() {
+      this.updatePosition();
+    },
     bind_targets_events() {
-      const targets = document.querySelectorAll("a, button, select, .featureCard, .OnlineButton, .DesktopButton, .tabButton, .download-card, .download-item, .proxy-option, .other-menu-item, .custom-dropdown-button, .custom-dropdown-option");
+      const targets = document.querySelectorAll("a, button, select, .featureCard, .OnlineButton, .DesktopButton, .tabButton, .download-card, .download-item, .proxy-option, .other-menu-item, .custom-dropdown-button, .custom-dropdown-option, .tips-header, .github-proxy-btn");
       targets.forEach(ele => {
         ele.classList.add("magnetic-target");
         ele.onmouseenter = () => {
@@ -2338,6 +2803,70 @@
       panel.classList.remove('show');
     }
     document.querySelectorAll('.download-card.active').forEach(el => el.classList.remove('active'));
+  }
+
+  function isValidGithubUrl(url) {
+    if (!url || typeof url !== 'string') return false;
+    const trimmedUrl = url.trim();
+    const githubPatterns = [
+      /^https?:\/\/(www\.)?github\.com\/[a-zA-Z0-9_-]+\/[a-zA-Z0-9_.-]+(\/.*)?$/i,
+      /^https?:\/\/(raw|api)\.githubusercontent\.com\/[a-zA-Z0-9_-]+\/[a-zA-Z0-9_.-]+.*$/i,
+      /^https?:\/\/github\.com\/[a-zA-Z0-9_-]+\/[a-zA-Z0-9_.-]+\/(releases|archive|blob|tree|raw)\/.*$/i,
+      /^https?:\/\/codeload\.github\.com\/[a-zA-Z0-9_-]+\/[a-zA-Z0-9_.-]+.*$/i
+    ];
+    return githubPatterns.some(pattern => pattern.test(trimmedUrl));
+  }
+
+  function showGithubProxyMessage(message, type) {
+    const messageEl = document.getElementById('github-proxy-message');
+    if (!messageEl) return;
+    messageEl.textContent = message;
+    messageEl.className = `github-proxy-message show ${type}`;
+    setTimeout(() => {
+      messageEl.classList.remove('show');
+    }, 5000);
+  }
+
+  function proxyDownloadGithub() {
+    const input = document.getElementById('github-url-input');
+    if (!input) return;
+    const url = input.value.trim();
+    if (!url) {
+      showGithubProxyMessage(translations[currentLang]['请输入GitHub链接'] || '请输入GitHub链接', 'error');
+      return;
+    }
+    if (!isValidGithubUrl(url)) {
+      showGithubProxyMessage(translations[currentLang]['无效的GitHub链接格式'] || '无效的GitHub链接格式', 'error');
+      return;
+    }
+    const proxy = proxyList.find(p => p.name === currentProxy);
+    const prefix = proxy ? proxy.prefix : '';
+    let proxyUrl;
+    if (url.startsWith('http://')) {
+      proxyUrl = prefix + url.replace('http://', 'https://');
+    } else {
+      proxyUrl = prefix + url;
+    }
+    window.open(proxyUrl, '_blank');
+    showGithubProxyMessage((translations[currentLang]['正在通过代理下载'] || '正在通过代理下载') + ': ' + (proxy ? proxy.name : 'direct'), 'success');
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    const githubInput = document.getElementById('github-url-input');
+    if (githubInput) {
+      githubInput.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+          proxyDownloadGithub();
+        }
+      });
+    }
+  });
+
+  function toggleTips() {
+    const tipsContainer = document.querySelector('.download-tips');
+    if (tipsContainer) {
+      tipsContainer.classList.toggle('expanded');
+    }
   }
 
   const proxyList = [
@@ -2689,7 +3218,16 @@
       '中文': '中文',
       '位置权限提示': '当前可能并未获取到位置权限，将无法自动匹配最优代理！',
       '自动主题': '自动主题',
-      '自动语言': '自动语言'
+      '自动语言': '自动语言',
+      'Github下载-代理': 'Github下载-代理',
+      '请输入GitHub链接': '请输入GitHub链接',
+      '无效的GitHub链接格式': '无效的GitHub链接格式，请检查后重试',
+      '正在通过代理下载': '正在通过代理下载',
+      '下载提速小贴士': '下载提速小贴士',
+      '建议开启Chrome和Edge的多线程下载功能': '建议开启 Chrome 和 Edge 的多线程下载功能（Parallel downloading）从而提高浏览器的下载效率',
+      'Chrome浏览器': 'Chrome 浏览器：',
+      'Edge新版浏览器': 'Edge 新版浏览器：',
+      '在下方里找到Parallel downloading': '在下方里找到"Parallel downloading"，将默认的"Default"更改为"Enabled"，最后点击右下角弹出的"重启"按钮即可。'
     },
     en: {
       '官网': 'Official Website',
@@ -2741,7 +3279,16 @@
       '中文': 'Chinese',
       '位置权限提示': 'Location permission may not be granted! Auto-match may not work.',
       '自动主题': 'Auto Theme',
-      '自动语言': 'Auto Language'
+      '自动语言': 'Auto Language',
+      'Github下载-代理': 'GitHub Proxy Download',
+      '请输入GitHub链接': 'Please enter a GitHub link',
+      '无效的GitHub链接格式': 'Invalid GitHub URL format, please check and retry',
+      '正在通过代理下载': 'Downloading via proxy',
+      '下载提速小贴士': 'Download Speed Tips',
+      '建议开启Chrome和Edge的多线程下载功能': 'Enable Parallel downloading in Chrome and Edge to improve download speed',
+      'Chrome浏览器': 'Chrome Browser:',
+      'Edge新版浏览器': 'Edge Browser (New):',
+      '在下方里找到Parallel downloading': 'Find "Parallel downloading", change "Default" to "Enabled", then click the "Relaunch" button at bottom right.'
     }
   };
 
