@@ -5,9 +5,10 @@
   <meta name="referrer" content="no-referrer">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AstraEditor Download - 第三方下载站</title>
+  <link rel="icon" href="images/logo-white.svg" type="image/svg+xml">
   <style>
     :root {
-      --sf-img-1: url("logo.svg");
+      --sf-img-1: url("images/logo.svg");
     }
   </style>
   <style>
@@ -398,6 +399,94 @@
       margin: 6px 16px;
     }
 
+    .more-selector {
+      position: relative;
+      display: inline-block;
+      height: 100%;
+      display: none;
+    }
+
+    .more-btn {
+      background-color: #00000000;
+      color: #eee;
+      border: 0;
+      height: 100%;
+      padding: 0 8px;
+      border-radius: 10px;
+      transition: background-color 0.3s ease;
+      cursor: pointer;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .more-btn:hover {
+      background-color: #333;
+    }
+
+    .daylight-mode .more-btn:hover {
+      background-color: var(--bg-secondary);
+    }
+
+    .more-menu {
+      position: absolute;
+      top: calc(100% + 8px);
+      right: 0;
+      min-width: 160px;
+      background-color: var(--bg-secondary);
+      border: 1px solid var(--scrollbar-thumb);
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-10px);
+      transition: all 0.25s ease;
+      z-index: 1000;
+      padding: 6px 0;
+    }
+
+    .more-menu.show {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .daylight-mode .more-menu {
+      box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+    }
+
+    .more-menu-item {
+      padding: 11px 16px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      color: #ddd;
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+    }
+
+    .more-menu-item:hover {
+      background: rgba(255,255,255,0.06);
+      color: #fff;
+    }
+
+    .daylight-mode .more-menu-item {
+      color: #666;
+    }
+
+    .daylight-mode .more-menu-item:hover {
+      background: rgba(0,0,0,0.04);
+      color: #333;
+    }
+
+    .more-menu-divider {
+      height: 1px;
+      background: var(--text-secondary);
+      opacity: 0.2;
+      margin: 6px 16px;
+    }
+
     .daylight-mode {
       --bg-color: #f8f8f8;
       --bg-secondary: #f0f0f0;
@@ -430,12 +519,22 @@
       color: #333;
     }
 
+    .daylight-mode #qq-button img {
+      filter: brightness(0);
+    }
+
     .daylight-mode .download-section {
       background-color: var(--bg-color);
     }
 
     .daylight-mode .download-title {
       color: var(--text-primary);
+    }
+
+    .daylight-mode .download-main-panel {
+      background-color: #fff;
+      border-color: #e0e0e0;
+      box-shadow: none;
     }
 
     .daylight-mode .end {
@@ -586,20 +685,21 @@
     }
 
     .daylight-mode .download-card {
-      background-color: var(--bg-secondary);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+      background-color: rgba(102, 204, 255, 0.04);
+      border-color: rgba(102, 204, 255, 0.2);
     }
 
     .daylight-mode .download-card:hover {
-      background-color: #e0e0e0;
+      background-color: rgba(102, 204, 255, 0.08);
+      border-color: var(--accent-color);
     }
 
-    .daylight-mode .download-name {
+    .daylight-mode .download-card-title {
       color: #333;
     }
 
-    .daylight-mode .download-desc {
-      color: #666;
+    .daylight-mode .download-card-icon img {
+      filter: none;
     }
 
     .daylight-mode .download-panel {
@@ -638,9 +738,28 @@
       color: var(--text-primary);
       font-size: 2.5rem;
       font-weight: bold;
-      margin-bottom: 50px;
+      margin-bottom: 30px;
       text-align: center;
       font-family: "Mi Sans", "Segoe UI", "Microsoft YaHei", "PingFang SC", -apple-system, BlinkMacSystemFont, sans-serif;
+      letter-spacing: 1px;
+    }
+
+    .tools-panel {
+      width: 100%;
+      max-width: 800px;
+      margin: 0 auto 24px auto;
+      padding: 28px 32px;
+      background-color: rgba(34, 34, 34, 0.4);
+      border: 1px solid var(--scrollbar-thumb);
+      border-radius: 16px;
+      backdrop-filter: blur(10px);
+      animation: fadeInUp 0.6s ease-out 0.2s both;
+    }
+
+    .download-main-panel {
+      background-color: rgba(34, 34, 34, 0.4);
+      border: 1px solid var(--scrollbar-thumb);
+      box-shadow: none;
     }
 
     .download-cards {
@@ -648,22 +767,9 @@
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 30px;
-      max-width: 1000px;
-      z-index: -1;
-      margin-bottom: 50px;
-    }
-
-    .tools-panel {
-      width: 100%;
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 28px 32px;
-      background-color: rgba(34, 34, 34, 0.4);
-      border: 1px solid var(--scrollbar-thumb);
-      border-radius: 16px;
-      backdrop-filter: blur(10px);
-      animation: fadeInUp 0.6s ease-out 0.2s both;
+      gap: 20px;
+      max-width: 100%;
+      z-index: 1;
     }
 
     .github-proxy-section {
@@ -1126,55 +1232,94 @@
     }
 
     .download-card {
-      background-color: var(--bg-secondary);
-      border-radius: 15px;
-      padding: 40px 50px;
-      width: 200px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      cursor: pointer;
+      width: 100%;
+      max-width: 100%;
+      background-color: rgba(102, 204, 255, 0.05);
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid rgba(102, 204, 255, 0.15);
       transition: all 0.3s ease;
-      box-shadow: none;
-      z-index: 0;
-    }
-
-    .fade-in-up {
-      animation: fadeInUp 0.6s ease-out forwards;
-      opacity: 0;
-    }
-
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
     }
 
     .download-card:hover {
-      transform: translateY(-10px);
-      background-color: var(--bg-secondary);
-      filter: brightness(1.1);
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+      border-color: var(--accent-color);
+      background-color: rgba(102, 204, 255, 0.08);
     }
 
-    .download-name {
+    .download-card-header {
+      display: flex;
+      align-items: center;
+      padding: 16px 20px;
+      cursor: pointer;
+      user-select: none;
+      gap: 12px;
+      transition: background-color 0.2s ease;
+    }
+
+    .download-card-header:hover {
+      background-color: rgba(102, 204, 255, 0.08);
+    }
+
+    .download-card-icon {
+      color: var(--accent-color);
+      flex-shrink: 0;
+    }
+
+    .download-card-icon img {
+      filter: brightness(0) invert(1);
+    }
+
+    .download-card-title {
+      flex: 1;
+      font-size: 15px;
+      font-weight: 600;
       color: var(--text-primary);
-      font-size: 1.3rem;
-      font-weight: bold;
-      margin-bottom: 10px;
-      font-family: "Mi Sans", "Segoe UI", "Microsoft YaHei", "PingFang SC", -apple-system, BlinkMacSystemFont, sans-serif;
+      font-family: var(--font-family);
     }
 
-    .download-desc {
+    .download-card-arrow {
       color: var(--text-secondary);
-      font-size: 0.9rem;
-      text-align: center;
-      font-family: "Mi Sans", "Segoe UI", "Microsoft YaHei", "PingFang SC", -apple-system, BlinkMacSystemFont, sans-serif;
+      transition: transform 0.3s ease;
+      flex-shrink: 0;
+    }
+
+    .download-card.expanded .download-card-arrow {
+      transform: rotate(180deg);
+    }
+
+    .download-card-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), padding 0.4s ease;
+      padding: 0 20px;
+      opacity: 0;
+    }
+
+    .download-card.expanded .download-card-content {
+      max-height: 600px;
+      padding: 0 20px 20px;
+      opacity: 1;
+      overflow-y: auto;
+      scrollbar-width: thin;
+      scrollbar-color: var(--scrollbar-thumb) transparent;
+    }
+
+    .download-card.expanded .download-card-content::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .download-card.expanded .download-card-content::-webkit-scrollbar-track {
+      background: transparent;
+      border-radius: 3px;
+    }
+
+    .download-card.expanded .download-card-content::-webkit-scrollbar-thumb {
+      background-color: var(--scrollbar-thumb);
+      border-radius: 3px;
+    }
+
+    .download-card.expanded .download-card-content::-webkit-scrollbar-thumb:hover {
+      background-color: var(--scrollbar-thumb-hover);
     }
 
     .download-panel {
@@ -1303,10 +1448,7 @@
       .download-cards {
         flex-direction: column;
         align-items: center;
-      }
-
-      .download-card {
-        width: 80%;
+        gap: 12px;
       }
     }
 
@@ -1845,11 +1987,6 @@
         gap: 15px;
       }
 
-      .download-card {
-        width: 90%;
-        padding: 25px 30px;
-      }
-
       .download-panel-inner {
         padding: 0 10px;
       }
@@ -2020,13 +2157,8 @@
         gap: 12px;
       }
 
-      .download-card {
-        width: 95%;
-        padding: 20px 25px;
-      }
-
-      .download-name {
-        font-size: 1.1rem;
+      .download-card-title {
+        font-size: 14px;
       }
 
       .download-panel {
@@ -2135,13 +2267,8 @@
         font-size: 11px;
       }
 
-      .download-card {
-        width: 98%;
-        padding: 15px 20px;
-      }
-
-      .download-name {
-        font-size: 1rem;
+      .download-card-title {
+        font-size: 13px;
       }
 
       .filter-tab {
@@ -2357,13 +2484,21 @@
       <button type="button" class="tabButton" id="lang-toggle-btn" onclick="toggleLang()">
         <a href="javascript:void(0)" class="tabButton">EN</a>
       </button>
+      <div class="more-selector" id="more-selector">
+        <button type="button" class="more-btn" onclick="toggleMoreMenu()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="1"></circle><circle cx="12" cy="12" r="1"></circle><circle cx="12" cy="19" r="1"></circle></svg>
+        </button>
+        <div class="more-menu" id="more-menu"></div>
+      </div>
     </div>
   </div>
   <div class="content">
     <div class="page" id="page-home" data-page="home" style="display:block;animation:0.4s ease-out 0s 1 normal none running fadeIn">
       <div class="download-section">
-        <h2 class="download-title">Download AstraEditor</h2>
-        <div class="download-cards" id="download-cards">
+        <div class="tools-panel download-main-panel">
+          <h2 class="download-title" data-i18n="Download AstraEditor">Download AstraEditor</h2>
+          <div id="download-cards" class="download-cards">
+          </div>
         </div>
         <div class="tools-panel">
           <div class="github-proxy-section">
@@ -2422,7 +2557,7 @@
         </span>
       </div>
       <div>
-        <a id="qq-button" class="tabButton" href="https://qm.qq.com/q/ynYzV85oHY">QQ</a><br>
+        <a id="qq-button" class="tabButton" href="https://qm.qq.com/q/ynYzV85oHY"><img src="images/qq.png" width="20" height="20" alt="QQ"></a><br>
       </div>
     </div>
     <div class="end-copyright">
@@ -2528,7 +2663,7 @@
       this.updatePosition();
     },
     bind_targets_events() {
-      const targets = document.querySelectorAll("a, button, select, .featureCard, .OnlineButton, .DesktopButton, .tabButton, .download-card, .download-item, .proxy-option, .other-menu-item, .custom-dropdown-button, .custom-dropdown-option, .tips-header, .github-proxy-btn");
+      const targets = document.querySelectorAll("a, button, select, .featureCard, .OnlineButton, .DesktopButton, .tabButton, .download-card-header, .download-item, .proxy-option, .other-menu-item, .custom-dropdown-button, .custom-dropdown-option, .tips-header, .github-proxy-btn");
       targets.forEach(ele => {
         ele.classList.add("magnetic-target");
         ele.onmouseenter = () => {
@@ -2557,76 +2692,73 @@
     source: []
   };
 
-  let currentPlatform = 'windows';
+  let currentPlatform = '';
 
-  function switchPlatform(key) {
-    const panel = document.getElementById('download-panel');
-    const cardNames = { 
-      windows: translations[currentLang]['Windows 下载'], 
-      macos: translations[currentLang]['macOS 下载'], 
-      linux: translations[currentLang]['Linux 下载'], 
-      source: translations[currentLang]['源码'] 
-    };
-    const assets = downloadData[key] || [];
-    const title = document.getElementById('download-panel-title');
-    const items = document.getElementById('download-items');
+  function toggleDownloadCard(key) {
+    const card = document.getElementById(`download-card-${key}`);
+    const content = document.getElementById(`download-content-${key}`);
+    if (!card || !content) return;
 
-    if (currentPlatform === key && panel.classList.contains('show')) {
-      panel.classList.remove('show');
-      document.querySelectorAll('.download-card.active').forEach(el => el.classList.remove('active'));
-      return;
+    const isExpanded = card.classList.contains('expanded');
+
+    document.querySelectorAll('.download-card.expanded').forEach(el => {
+      el.classList.remove('expanded');
+    });
+
+    if (!isExpanded) {
+      loadCardContent(key);
+      card.classList.add('expanded');
+      currentPlatform = key;
+    } else {
+      currentPlatform = '';
     }
+  }
 
-    document.querySelectorAll('.download-card').forEach(el => el.classList.remove('active'));
-    const activeCard = document.querySelector(`.download-card[onclick="switchPlatform('${key}')"]`);
-    if (activeCard) activeCard.classList.add('active');
+  function loadCardContent(key) {
+    const filterTabs = document.getElementById(`filter-tabs-${key}`);
+    const items = document.getElementById(`download-items-${key}`);
+    if (!filterTabs || !items) return;
 
-    title.textContent = cardNames[key];
-
+    const assets = downloadData[key] || [];
     let filterTabsHtml = '';
     if (key === 'linux') {
       filterTabsHtml = `
-        <div class="filter-tabs">
-          <button class="filter-tab active" onclick="selectFilter('all')" data-i18n="全部">全部</button>
-          <button class="filter-tab" onclick="selectFilter('amd')" data-i18n="amd">AMD64</button>
-          <button class="filter-tab" onclick="selectFilter('arm')" data-i18n="arm">ARM64</button>
-          <button class="filter-tab" onclick="selectFilter('arm32')" data-i18n="arm32">armv7</button>
-          <span style="color:var(--text-secondary);font-size:12px;margin:0 8px">|</span>
-          <button class="filter-tab" onclick="selectFilter('deb')" data-i18n="deb">.deb</button>
-          <button class="filter-tab" onclick="selectFilter('rpm')" data-i18n="rpm">.rpm</button>
-          <button class="filter-tab" onclick="selectFilter('appimage')" data-i18n="appimage">AppImage</button>
-          <button class="filter-tab" onclick="selectFilter('tar')" data-i18n="tar">.tar.gz</button>
-          <button class="filter-tab" onclick="selectFilter('tarxz')" data-i18n="tarxz">.tar.xz</button>
-          <button class="filter-tab" onclick="selectFilter('pkgzst')" data-i18n="pkgzst">.pkg.tar.zst</button>
-          <button class="filter-tab" onclick="selectFilter('tarzst')" data-i18n="tarzst">.tar.zst</button>
-          <button class="filter-tab" onclick="selectFilter('zip')" data-i18n="zip">.zip</button>
-        </div>
+        <button class="filter-tab active" onclick="selectFilter('all', '${key}')" data-i18n="全部">全部</button>
+        <button class="filter-tab" onclick="selectFilter('amd', '${key}')" data-i18n="amd">AMD64</button>
+        <button class="filter-tab" onclick="selectFilter('arm', '${key}')" data-i18n="arm">ARM64</button>
+        <button class="filter-tab" onclick="selectFilter('arm32', '${key}')" data-i18n="arm32">armv7</button>
+        <span style="color:var(--text-secondary);font-size:12px;margin:0 8px">|</span>
+        <button class="filter-tab" onclick="selectFilter('deb', '${key}')" data-i18n="deb">.deb</button>
+        <button class="filter-tab" onclick="selectFilter('rpm', '${key}')" data-i18n="rpm">.rpm</button>
+        <button class="filter-tab" onclick="selectFilter('appimage', '${key}')" data-i18n="appimage">AppImage</button>
+        <button class="filter-tab" onclick="selectFilter('snap', '${key}')" data-i18n="snap">.snap</button>
+        <button class="filter-tab" onclick="selectFilter('tar', '${key}')" data-i18n="tar">.tar.gz</button>
+        <button class="filter-tab" onclick="selectFilter('tarxz', '${key}')" data-i18n="tarxz">.tar.xz</button>
+        <button class="filter-tab" onclick="selectFilter('pkgzst', '${key}')" data-i18n="pkgzst">.pkg.tar.zst</button>
+        <button class="filter-tab" onclick="selectFilter('tarzst', '${key}')" data-i18n="tarzst">.tar.zst</button>
+        <button class="filter-tab" onclick="selectFilter('zip', '${key}')" data-i18n="zip">.zip</button>
       `;
     } else if (key === 'windows') {
       filterTabsHtml = `
-        <div class="filter-tabs">
-          <button class="filter-tab active" onclick="selectFilter('all')" data-i18n="全部">全部</button>
-          <button class="filter-tab" onclick="selectFilter('x64')" data-i18n="x64">x64</button>
-          <button class="filter-tab" onclick="selectFilter('x86')" data-i18n="x86">x86</button>
-          <button class="filter-tab" onclick="selectFilter('arm64')" data-i18n="arm64">ARM64</button>
-          <span style="color:var(--text-secondary);font-size:12px;margin:0 8px">|</span>
-          <button class="filter-tab" onclick="selectFilter('exe')" data-i18n="exe">.exe</button>
-          <button class="filter-tab" onclick="selectFilter('msi')" data-i18n="msi">.msi</button>
-          <button class="filter-tab" onclick="selectFilter('appx')" data-i18n="appx">.appx</button>
-          <button class="filter-tab" onclick="selectFilter('zip')" data-i18n="zip">.zip</button>
-        </div>
+        <button class="filter-tab active" onclick="selectFilter('all', '${key}')" data-i18n="全部">全部</button>
+        <button class="filter-tab" onclick="selectFilter('x64', '${key}')" data-i18n="x64">x64</button>
+        <button class="filter-tab" onclick="selectFilter('x86', '${key}')" data-i18n="x86">x86</button>
+        <button class="filter-tab" onclick="selectFilter('arm64', '${key}')" data-i18n="arm64">ARM64</button>
+        <span style="color:var(--text-secondary);font-size:12px;margin:0 8px">|</span>
+        <button class="filter-tab" onclick="selectFilter('exe', '${key}')" data-i18n="exe">.exe</button>
+        <button class="filter-tab" onclick="selectFilter('msi', '${key}')" data-i18n="msi">.msi</button>
+        <button class="filter-tab" onclick="selectFilter('appx', '${key}')" data-i18n="appx">.appx</button>
+        <button class="filter-tab" onclick="selectFilter('zip', '${key}')" data-i18n="zip">.zip</button>
       `;
     } else if (key === 'macos') {
       filterTabsHtml = `
-        <div class="filter-tabs">
-          <button class="filter-tab active" onclick="selectFilter('all')" data-i18n="全部">全部</button>
-          <button class="filter-tab" onclick="selectFilter('x64')" data-i18n="x64">x64</button>
-          <button class="filter-tab" onclick="selectFilter('arm')" data-i18n="arm">ARM64</button>
-          <span style="color:var(--text-secondary);font-size:12px;margin:0 8px">|</span>
-          <button class="filter-tab" onclick="selectFilter('dmg')" data-i18n="dmg">.dmg</button>
-          <button class="filter-tab" onclick="selectFilter('pkg')" data-i18n="pkg">.pkg</button>
-          <button class="filter-tab" onclick="selectFilter('zip')" data-i18n="zip">.zip</button>
-        </div>
+        <button class="filter-tab active" onclick="selectFilter('all', '${key}')" data-i18n="全部">全部</button>
+        <button class="filter-tab" onclick="selectFilter('x64', '${key}')" data-i18n="x64">x64</button>
+        <button class="filter-tab" onclick="selectFilter('arm', '${key}')" data-i18n="arm">ARM64</button>
+        <span style="color:var(--text-secondary);font-size:12px;margin:0 8px">|</span>
+        <button class="filter-tab" onclick="selectFilter('dmg', '${key}')" data-i18n="dmg">.dmg</button>
+        <button class="filter-tab" onclick="selectFilter('pkg', '${key}')" data-i18n="pkg">.pkg</button>
+        <button class="filter-tab" onclick="selectFilter('zip', '${key}')" data-i18n="zip">.zip</button>
       `;
     }
 
@@ -2634,23 +2766,20 @@
     assets.forEach(asset => {
       const arch = detectArch(asset.name, key);
       const suffix = detectSuffix(asset.name, key);
-      itemsHtml += `<div class="download-item" data-arch="${arch}" data-suffix="${suffix}" onclick="animateToPage('${asset.proxied_url}')">`;
+      itemsHtml += `<div class="download-item" data-arch="${arch}" data-suffix="${suffix}" data-platform="${key}" onclick="animateToPage('${asset.proxied_url}')">`;
       itemsHtml += `<span class="download-item-name">${asset.name}</span>`;
       itemsHtml += '</div>';
     });
-    const existingFilters = title.nextElementSibling;
-    if (existingFilters && existingFilters.classList.contains('filter-tabs')) {
-      existingFilters.remove();
-    }
-    title.insertAdjacentHTML('afterend', filterTabsHtml);
+
+    filterTabs.innerHTML = filterTabsHtml;
     items.innerHTML = itemsHtml;
-    currentPlatform = key;
-    currentArch = 'all';
-    currentSuffix = 'all';
-    panel.classList.add('show');
     pointer.bind_targets_events();
     applyLang();
-    selectFilter('all');
+    selectFilter('all', key);
+  }
+
+  function switchPlatform(key) {
+    toggleDownloadCard(key);
   }
 
   let currentArch = 'all';
@@ -2692,6 +2821,7 @@
       if (name.endsWith('.deb')) return 'deb';
       if (name.endsWith('.rpm')) return 'rpm';
       if (name.endsWith('.appimage') || name.includes('appimage')) return 'appimage';
+      if (name.endsWith('.snap')) return 'snap';
       if (name.endsWith('.tar.gz') || name.endsWith('.tgz')) return 'tar';
       if (name.endsWith('.tar.xz') || name.endsWith('.txz')) return 'tarxz';
       if (name.endsWith('.pkg.tar.zst')) return 'pkgzst';
@@ -2701,28 +2831,31 @@
     }
   }
 
-  function selectFilter(value) {
+  function selectFilter(value, platform) {
     const archValues = ['amd', 'arm', 'arm32', 'x64', 'x86', 'arm64'];
-    const suffixValues = ['deb', 'rpm', 'appimage', 'tar', 'tarxz', 'pkgzst', 'tarzst', 'zip', 'exe', 'msi', 'dmg', 'pkg', 'appx'];
+    const suffixValues = ['deb', 'rpm', 'appimage', 'snap', 'tar', 'tarxz', 'pkgzst', 'tarzst', 'zip', 'exe', 'msi', 'dmg', 'pkg', 'appx'];
+    const targetPlatform = platform || currentPlatform;
+    const filterTabsEl = document.getElementById(`filter-tabs-${targetPlatform}`);
+    if (!filterTabsEl) return;
 
-    const allTab = document.querySelector('.filter-tab[data-i18n="全部"]');
+    const allTab = filterTabsEl.querySelector('.filter-tab[data-i18n="全部"]');
 
     if (value === 'all') {
       currentArch = 'all';
       currentSuffix = 'all';
-      document.querySelectorAll('.filter-tab').forEach(tab => {
+      filterTabsEl.querySelectorAll('.filter-tab').forEach(tab => {
         tab.classList.remove('active');
       });
       if (allTab) {
         allTab.classList.add('active');
       }
     } else if (archValues.includes(value)) {
-      const tab = document.querySelector(`.filter-tab[data-i18n="${value}"]`);
+      const tab = filterTabsEl.querySelector(`.filter-tab[data-i18n="${value}"]`);
       if (tab) {
         if (tab.classList.contains('active')) {
           tab.classList.remove('active');
         } else {
-          document.querySelectorAll('.filter-tab').forEach(t => {
+          filterTabsEl.querySelectorAll('.filter-tab').forEach(t => {
             const tabValue = t.getAttribute('data-i18n');
             if (archValues.includes(tabValue)) {
               t.classList.remove('active');
@@ -2735,12 +2868,12 @@
         allTab.classList.remove('active');
       }
     } else if (suffixValues.includes(value)) {
-      const tab = document.querySelector(`.filter-tab[data-i18n="${value}"]`);
+      const tab = filterTabsEl.querySelector(`.filter-tab[data-i18n="${value}"]`);
       if (tab) {
         if (tab.classList.contains('active')) {
           tab.classList.remove('active');
         } else {
-          document.querySelectorAll('.filter-tab').forEach(t => {
+          filterTabsEl.querySelectorAll('.filter-tab').forEach(t => {
             const tabValue = t.getAttribute('data-i18n');
             if (suffixValues.includes(tabValue)) {
               t.classList.remove('active');
@@ -2757,7 +2890,7 @@
     let activeArch = 'all';
     let activeSuffix = 'all';
 
-    document.querySelectorAll('.filter-tab.active').forEach(tab => {
+    filterTabsEl.querySelectorAll('.filter-tab.active').forEach(tab => {
       const tabValue = tab.getAttribute('data-i18n');
       if (archValues.includes(tabValue)) {
         activeArch = tabValue;
@@ -2769,13 +2902,13 @@
     currentArch = activeArch;
     currentSuffix = activeSuffix;
 
-    const activeTabs = document.querySelectorAll('.filter-tab.active');
-    const hasActiveFilters = activeTabs.length > 0 && !document.querySelector('.filter-tab.active[data-i18n="全部"]');
+    const activeTabs = filterTabsEl.querySelectorAll('.filter-tab.active');
+    const hasActiveFilters = activeTabs.length > 0 && !filterTabsEl.querySelector('.filter-tab.active[data-i18n="全部"]');
 
     if (!hasActiveFilters && activeTabs.length === 0) {
       currentArch = 'all';
       currentSuffix = 'all';
-      document.querySelectorAll('.filter-tab').forEach(tab => {
+      filterTabsEl.querySelectorAll('.filter-tab').forEach(tab => {
         tab.classList.remove('active');
       });
       if (allTab) {
@@ -2783,11 +2916,14 @@
       }
     }
 
-    filterDownloadItems();
+    filterDownloadItems(targetPlatform);
   }
 
-  function filterDownloadItems() {
-    const items = document.querySelectorAll('.download-item');
+  function filterDownloadItems(platform) {
+    const targetPlatform = platform || currentPlatform;
+    const itemsContainer = document.getElementById(`download-items-${targetPlatform}`);
+    if (!itemsContainer) return;
+    const items = itemsContainer.querySelectorAll('.download-item');
     items.forEach(item => {
       const itemArch = item.getAttribute('data-arch');
       const itemSuffix = item.getAttribute('data-suffix');
@@ -2798,11 +2934,8 @@
   }
 
   function hideDownloadPanel() {
-    const panel = document.getElementById('download-panel');
-    if (panel) {
-      panel.classList.remove('show');
-    }
-    document.querySelectorAll('.download-card.active').forEach(el => el.classList.remove('active'));
+    document.querySelectorAll('.download-card.expanded').forEach(el => el.classList.remove('expanded'));
+    currentPlatform = '';
   }
 
   function isValidGithubUrl(url) {
@@ -3122,6 +3255,94 @@
     if (menu) menu.classList.toggle('show');
   }
 
+  function toggleMoreMenu() {
+    const menu = document.getElementById('more-menu');
+    if (menu) menu.classList.toggle('show');
+  }
+
+  const navItemsOrder = ['官网', '代理', '其它', 'theme-toggle-btn', 'lang-toggle-btn'];
+  let collapsedNavItems = [];
+
+  function checkNavOverflow() {
+    const tabButtonTab = document.querySelector('.tabButtonTab');
+    const moreSelector = document.getElementById('more-selector');
+    if (!tabButtonTab || !moreSelector) return;
+
+    const windowWidth = window.innerWidth;
+    const items = Array.from(tabButtonTab.children).filter(el => el.id !== 'more-selector' && el.style.display !== 'none');
+
+    if (windowWidth < 520 && items.length > 1) {
+      const lastItem = items[items.length - 1];
+      if (!collapsedNavItems.includes(lastItem)) {
+        lastItem.style.display = 'none';
+        collapsedNavItems.push(lastItem);
+        updateMoreMenu();
+        moreSelector.style.display = 'inline-block';
+      }
+    } else if (windowWidth >= 520 && collapsedNavItems.length > 0) {
+      const restoreItem = collapsedNavItems.pop();
+      restoreItem.style.display = '';
+      updateMoreMenu();
+      if (collapsedNavItems.length === 0) {
+        moreSelector.style.display = 'none';
+      }
+    }
+  }
+
+  function updateMoreMenu() {
+    const moreMenu = document.getElementById('more-menu');
+    if (!moreMenu) return;
+    moreMenu.innerHTML = '';
+    collapsedNavItems.forEach((item, index) => {
+      const clonedItem = item.cloneNode(true);
+      clonedItem.style.display = '';
+      clonedItem.classList.add('more-menu-item');
+
+      if (item.id === 'theme-toggle-btn') {
+        const menuItem = document.createElement('div');
+        menuItem.className = 'more-menu-item';
+        menuItem.textContent = document.body.classList.contains('daylight-mode') ? '夜间' : '日间';
+        menuItem.onclick = () => { toggleTheme(); toggleMoreMenu(); };
+        moreMenu.appendChild(menuItem);
+      } else if (item.id === 'lang-toggle-btn') {
+        const menuItem = document.createElement('div');
+        menuItem.className = 'more-menu-item';
+        menuItem.textContent = currentLang === 'zh' ? 'EN' : '中文';
+        menuItem.onclick = () => { toggleLang(); toggleMoreMenu(); };
+        moreMenu.appendChild(menuItem);
+      } else if (item.querySelector('.tabButton[data-i18n="官网"]')) {
+        const menuItem = document.createElement('div');
+        menuItem.className = 'more-menu-item';
+        menuItem.textContent = translations[currentLang]['官网'] || '官网';
+        menuItem.onclick = () => { animateToPage('https://editors.astras.top/'); toggleMoreMenu(); };
+        moreMenu.appendChild(menuItem);
+      } else if (item.querySelector('.proxy-selector')) {
+        const menuItem = document.createElement('div');
+        menuItem.className = 'more-menu-item';
+        menuItem.textContent = translations[currentLang]['代理'] || '代理';
+        menuItem.onclick = () => { toggleProxyMenu(); toggleMoreMenu(); };
+        moreMenu.appendChild(menuItem);
+      } else if (item.querySelector('.other-selector')) {
+        const menuItem = document.createElement('div');
+        menuItem.className = 'more-menu-item';
+        menuItem.textContent = translations[currentLang]['其它'] || '其它';
+        menuItem.onclick = () => { toggleOtherMenu(); toggleMoreMenu(); };
+        moreMenu.appendChild(menuItem);
+      } else {
+        moreMenu.appendChild(clonedItem);
+      }
+    });
+  }
+
+  window.addEventListener('resize', () => {
+    clearTimeout(window.navResizeTimeout);
+    window.navResizeTimeout = setTimeout(checkNavOverflow, 100);
+  });
+
+  window.addEventListener('load', () => {
+    setTimeout(checkNavOverflow, 500);
+  });
+
   function toggleReleaseDropdown() {
     const menu = document.getElementById('release-dropdown-menu');
     if (menu) menu.classList.toggle('show');
@@ -3200,6 +3421,7 @@
       'deb': '.deb',
       'rpm': '.rpm',
       'appimage': 'AppImage',
+      'snap': '.snap',
       'tar': '.tar.gz',
       'tarxz': '.tar.xz',
       'pkgzst': '.pkg.tar.zst',
@@ -3261,6 +3483,7 @@
       'deb': '.deb',
       'rpm': '.rpm',
       'appimage': 'AppImage',
+      'snap': '.snap',
       'tar': '.tar.gz',
       'tarxz': '.tar.xz',
       'pkgzst': '.pkg.tar.zst',
@@ -3318,6 +3541,9 @@
     document.querySelectorAll('#theme-toggle-btn a.tabButton').forEach(el => {
       el.textContent = currentTheme === 'dark' ? translations[currentLang]['夜间'] : translations[currentLang]['日间'];
     });
+    if (collapsedNavItems.length > 0) {
+      updateMoreMenu();
+    }
   }
 
   function applyTheme() {
@@ -3455,21 +3681,30 @@
       { key: 'source', name: translations[currentLang]['源码'], assets: categorized.source }
     ];
 
+    const cardIcons = {
+      windows: '<img src="images/windows.svg" width="18" height="18" alt="Windows">',
+      macos: '<img src="images/apple.svg" width="18" height="18" alt="macOS">',
+      linux: '<img src="images/linux.svg" width="18" height="18" alt="Linux">',
+      source: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="8 17 4 12 8 7"></polyline><polyline points="16 17 20 12 16 7"></polyline><line x1="12" y1="4" x2="12" y2="20"></line></svg>'
+    };
+
     let delay = 0.1;
     cards.forEach(card => {
       if (card.assets.length > 0 || card.key === 'source') {
-        html += `<div class="download-card fade-in-up magnetic-target" style="animation-delay: ${delay}s" onclick="switchPlatform('${card.key}')">`;
-        html += `<div class="download-name" data-i18n="${card.key === 'source' ? '源码' : ''}">${card.name}</div>`;
-        html += '</div>';
-        delay += 0.1;
+        html += `<div class="download-card fade-in-up magnetic-target" style="animation-delay: ${delay}s" data-platform="${card.key}" id="download-card-${card.key}">`;
+        html += `<div class="download-card-header magnetic-target" onclick="toggleDownloadCard('${card.key}')">`;
+        html += `<span class="download-card-icon">${cardIcons[card.key] || cardIcons.source}</span>`;
+        html += `<span class="download-card-title" data-i18n="${card.key === 'source' ? '源码' : ''}">${card.name}</span>`;
+        html += `<svg class="download-card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>`;
+        html += `</div>`;
+        html += `<div class="download-card-content" id="download-content-${card.key}">`;
+        html += `<div class="filter-tabs" id="filter-tabs-${card.key}"></div>`;
+        html += `<div class="download-items" id="download-items-${card.key}"></div>`;
+        html += `</div>`;
+        html += `</div>`;
+        delay += 0.15;
       }
     });
-
-    html += `<div class="download-panel" id="download-panel">`;
-    html += `<div class="download-panel-inner">`;
-    html += `<div class="download-panel-title" id="download-panel-title" ></div>`;
-    html += `<div class="download-items" id="download-items"></div>`;
-    html += '</div></div>';
 
     document.getElementById('download-cards').innerHTML = html;
 
@@ -3515,10 +3750,13 @@
     if (!event.target.closest('.other-selector')) {
       document.querySelectorAll('.other-menu.show').forEach(el => el.classList.remove('show'));
     }
+    if (!event.target.closest('.more-selector')) {
+      document.querySelectorAll('.more-menu.show').forEach(el => el.classList.remove('show'));
+    }
     if (!event.target.closest('.custom-dropdown')) {
       document.querySelectorAll('.custom-dropdown-menu.show').forEach(el => el.classList.remove('show'));
     }
-    if (!event.target.closest('.download-card') && !event.target.closest('.download-panel')) {
+    if (!event.target.closest('.download-card') && !event.target.closest('.download-card-content')) {
       hideDownloadPanel();
     }
   });
