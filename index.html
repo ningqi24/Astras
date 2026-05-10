@@ -2311,7 +2311,7 @@
   </style>
   
   <link rel="canonical" href="https://astras.cc/">
-  <meta http-equiv="content-security-policy" content="default-src 'none'; connect-src 'self'; font-src 'self' data:; img-src 'self' data:; style-src 'unsafe-inline'; media-src 'self' data:; script-src 'unsafe-inline' data:; object-src 'self' data:; frame-src 'self' data:;">
+  <meta http-equiv="content-security-policy" content="default-src 'none'; connect-src 'self' https://ghproxy.net https://gh-proxy.com https://gh-proxy.org https://github.com https://api.github.com; font-src 'self' data:; img-src 'self' data:; style-src 'unsafe-inline'; media-src 'self' data:; script-src 'unsafe-inline' data: http://ip-api.com; object-src 'self' data:; frame-src 'self' data:;">
   <style>
     .loading {
       position: fixed;
@@ -2464,10 +2464,7 @@
         </button>
         <div class="other-menu" id="other-menu">
           <div class="other-menu-item" onclick="animateToPage('https://github.com/AstraEditor/Desktop/releases')">
-            <span data-i18n="github">github</span>
-          </div>
-          <div class="other-menu-item" onclick="animateToPage('https://astras.ct.ws/')">
-            <span data-i18n="友情下载站">友情下载站</span>
+            <span data-i18n="github">官方GitHub仓库</span>
           </div>
           <div class="other-menu-divider"></div>
           <div class="other-menu-item" onclick="resetAutoTheme()">
@@ -2538,6 +2535,14 @@
                 <code>edge://flags/#enable-parallel-downloading</code>
               </div>
               <p class="tips-text" data-i18n="在下方里找到Parallel downloading">在下方里找到"Parallel downloading"，将默认的"Default"更改为"Enabled"，最后点击右下角弹出的"重启"按钮即可。</p>
+              <div class="tips-item">
+                <strong>中国内地各省份代理分配方案：</strong>
+                <div style="margin-top:8px;font-size:12.5px;line-height:1.9;color:#ccc">
+                  <div><span style="color:#66ccff">● ghproxy.net</span> — 北京、天津、河北、山西、内蒙古、辽宁、吉林、黑龙江</div>
+                  <div><span style="color:#66ccff">● gh-proxy.com</span> — 上海、江苏、浙江、安徽、福建、江西、山东、重庆、四川、贵州、云南、西藏</div>
+                  <div><span style="color:#66ccff">● gh-proxy.org</span> — 河南、湖北、湖南、广东、广西、海南、陕西、甘肃、青海、宁夏、新疆</div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -2731,7 +2736,6 @@
         <button class="filter-tab" onclick="selectFilter('deb', '${key}')" data-i18n="deb">.deb</button>
         <button class="filter-tab" onclick="selectFilter('rpm', '${key}')" data-i18n="rpm">.rpm</button>
         <button class="filter-tab" onclick="selectFilter('appimage', '${key}')" data-i18n="appimage">AppImage</button>
-        <button class="filter-tab" onclick="selectFilter('snap', '${key}')" data-i18n="snap">.snap</button>
         <button class="filter-tab" onclick="selectFilter('tar', '${key}')" data-i18n="tar">.tar.gz</button>
         <button class="filter-tab" onclick="selectFilter('tarxz', '${key}')" data-i18n="tarxz">.tar.xz</button>
         <button class="filter-tab" onclick="selectFilter('pkgzst', '${key}')" data-i18n="pkgzst">.pkg.tar.zst</button>
@@ -2821,7 +2825,6 @@
       if (name.endsWith('.deb')) return 'deb';
       if (name.endsWith('.rpm')) return 'rpm';
       if (name.endsWith('.appimage') || name.includes('appimage')) return 'appimage';
-      if (name.endsWith('.snap')) return 'snap';
       if (name.endsWith('.tar.gz') || name.endsWith('.tgz')) return 'tar';
       if (name.endsWith('.tar.xz') || name.endsWith('.txz')) return 'tarxz';
       if (name.endsWith('.pkg.tar.zst')) return 'pkgzst';
@@ -2833,7 +2836,7 @@
 
   function selectFilter(value, platform) {
     const archValues = ['amd', 'arm', 'arm32', 'x64', 'x86', 'arm64'];
-    const suffixValues = ['deb', 'rpm', 'appimage', 'snap', 'tar', 'tarxz', 'pkgzst', 'tarzst', 'zip', 'exe', 'msi', 'dmg', 'pkg', 'appx'];
+    const suffixValues = ['deb', 'rpm', 'appimage', 'tar', 'tarxz', 'pkgzst', 'tarzst', 'zip', 'exe', 'msi', 'dmg', 'pkg', 'appx'];
     const targetPlatform = platform || currentPlatform;
     const filterTabsEl = document.getElementById(`filter-tabs-${targetPlatform}`);
     if (!filterTabsEl) return;
@@ -3006,48 +3009,6 @@
     { name: 'ghproxy.net', prefix: 'https://ghproxy.net/' },
     { name: 'gh-proxy.com', prefix: 'https://gh-proxy.com/' },
     { name: 'gh-proxy.org', prefix: 'https://gh-proxy.org/' },
-    { name: 'kkgithub', prefix: 'https://kkgithub.com/' },
-    { name: 'kgithub', prefix: 'https://kgithub.com/' },
-    { name: 'gitclone', prefix: 'https://gitclone.com/' },
-    { name: 'bgithub', prefix: 'https://bgithub.xyz/' },
-    { name: 'moeyy-gh', prefix: 'https://moeyy.cn/gh-proxy/' },
-    { name: 'ghpci', prefix: 'https://ghp.ci/' },
-    { name: 'homeboyc', prefix: 'https://ghproxy.homeboyc.cn/' },
-    { name: 'toolwa', prefix: 'https://toolwa.com/github/' },
-    { name: 'fastgit', prefix: 'https://hub.fastgit.org/' },
-    { name: 'fastgit.org', prefix: 'https://github.com.cnpmjs.org/' },
-    { name: 'mirror', prefix: 'https://mirror.ghproxy.com/' },
-    { name: '7ed', prefix: 'https://7ed.net/' },
-    { name: 'nite07', prefix: 'https://g.nite07.org/' },
-    { name: 'githubfast', prefix: 'https://githubfast.com/' },
-    { name: 'gitmirror', prefix: 'https://gitmirror.com/' },
-    { name: 'hunsh', prefix: 'https://shrill-pond-3e81.hunsh.workers.dev/' },
-    { name: 'hf-mirror', prefix: 'https://hf-mirror.com/' },
-    { name: 'g.ioiox', prefix: 'https://g.ioiox.com/' },
-    { name: 'gh.api.99988866', prefix: 'https://gh.api.99988866.xyz/' },
-    { name: 'crazywhale', prefix: 'https://gh.crazywhale.net/' },
-    { name: 'goproxy', prefix: 'https://goproxy.cn/' },
-    { name: 'moeyy', prefix: 'https://github.moeyy.cn/' },
-    { name: 'nuaa', prefix: 'https://hub.nuaa.cf/' },
-    { name: 'fgit', prefix: 'https://hub.fgit.ml/' },
-    { name: 'yumenaka', prefix: 'https://git.yumenaka.net/' },
-    { name: 'zhimg', prefix: 'https://gitlink.org.cn/' },
-    { name: 'ruby-china', prefix: 'https://github.ruby-china.com/' },
-    { name: 'git-sdut', prefix: 'https://git.sdut.me/' },
-    { name: 'git-zhlh6', prefix: 'https://git.zhlh6.cn/' },
-    { name: 'git-ckyl', prefix: 'https://git.ckyl.me/' },
-    { name: 'git-zhlh6-cn', prefix: 'https://github.zhlh6.cn/' },
-    { name: 'git-puby', prefix: 'https://github.ruby-china.com/' },
-    { name: 'tuna', prefix: 'https://mirrors.tuna.tsinghua.edu.cn/' },
-    { name: 'ustc', prefix: 'https://mirrors.ustc.edu.cn/' },
-    { name: 'sjtu', prefix: 'https://mirrors.sjtug.sjtu.edu.cn/' },
-    { name: 'cqu', prefix: 'https://mirrors.cqu.edu.cn/' },
-    { name: 'pku', prefix: 'https://mirrors.pku.edu.cn/' },
-    { name: 'aliyun', prefix: 'https://developer.aliyun.com/mirror/' },
-    { name: 'huawei', prefix: 'https://mirrors.huaweicloud.com/' },
-    { name: 'tencent', prefix: 'https://mirrors.cloud.tencent.com/' },
-    { name: '163', prefix: 'https://mirrors.163.com/' },
-    { name: 'opentuna', prefix: 'https://opentuna.cn/' },
     { name: 'github', prefix: '' }
   ];
 
@@ -3101,58 +3062,93 @@
     });
   }
 
-  function getCountryFromIP() {
-    return fetch('https://api.ipify.org?format=json')
-      .then(response => response.json())
-      .then(data => {
-        return fetch(`https://ipinfo.io/${data.ip}/json`)
-          .then(response => response.json())
-          .then(ipData => {
-            return ipData.country;
-          });
-      })
-      .catch(error => {
-        console.log('IP info error:', error);
-        return null;
-      });
+  function getGeoFromIP() {
+    return new Promise(function(resolve) {
+      var timeout = setTimeout(function() {
+        resolve({ country: 'CN', region: 'Guangdong' });
+      }, 5000);
+
+      var cbName = '_geo_cb_' + Date.now();
+      window[cbName] = function(data) {
+        clearTimeout(timeout);
+        delete window[cbName];
+        var s = document.getElementById(cbName);
+        if (s) s.remove();
+        if (data && data.status === 'success') {
+          console.log('[Geo] ip-api.com:', data.countryCode, data.regionName);
+          resolve({ country: data.countryCode, region: (data.regionName || data.region || '') });
+        } else {
+          resolve({ country: 'CN', region: 'Guangdong' });
+        }
+      };
+      var script = document.createElement('script');
+      script.id = cbName;
+      script.src = 'http://ip-api.com/json/?lang=zh-CN&callback=' + cbName;
+      script.onerror = function() {
+        clearTimeout(timeout);
+        delete window[cbName];
+        script.remove();
+        resolve({ country: 'CN', region: 'Guangdong' });
+      };
+      document.head.appendChild(script);
+    });
   }
 
   function selectOptimalProxyByLocation() {
-    showLocationPermissionWarning();
-    Promise.all([getClientLocation(), getCountryFromIP()]).then(([location, country]) => {
+    getGeoFromIP().then(geo => {
       let optimalProxy = 'ghproxy.net';
+      console.log('[AutoMatch] Geo data:', geo);
 
-      if (country) {
-        switch (country) {
-          case 'CN':
-            optimalProxy = 'goproxy';
-            break;
-          case 'US':
+      if (geo && geo.country) {
+        const region = (geo.region || '').toLowerCase();
+        console.log('[AutoMatch] Region:', region, '| Country:', geo.country);
+
+        if (geo.country === 'CN') {
+          const northChina = ['beijing', 'tianjin', 'hebei', 'shanxi', 'inner mongolia', 'nei menggu', '北京', '天津', '河北', '山西', '内蒙古'];
+          const eastChina = ['shanghai', 'jiangsu', 'zhejiang', 'anhui', 'fujian', 'jiangxi', 'shandong', '上海', '江苏', '浙江', '安徽', '福建', '江西', '山东'];
+          const centralChina = ['henan', 'hubei', 'hunan', '河南', '湖北', '湖南'];
+          const southChina = ['guangdong', 'guangxi', 'hainan', '广东', '广西', '海南'];
+          const southWest = ['chongqing', 'sichuan', 'guizhou', 'yunnan', 'xizang', 'tibet', '重庆', '四川', '贵州', '云南', '西藏'];
+          const northWest = ['shaanxi', 'gansu', 'qinghai', 'ningxia', 'xinjiang', '陕西', '甘肃', '青海', '宁夏', '新疆'];
+          const northEast = ['liaoning', 'jilin', 'heilongjiang', '辽宁', '吉林', '黑龙江'];
+
+          if (northChina.some(p => region.includes(p)) || northEast.some(p => region.includes(p))) {
             optimalProxy = 'ghproxy.net';
-            break;
-          case 'JP':
-            optimalProxy = 'ghproxy.com';
-            break;
-          case 'KR':
-            optimalProxy = 'ghproxy.com';
-            break;
-          case 'SG':
+          } else if (eastChina.some(p => region.includes(p)) || southWest.some(p => region.includes(p))) {
+            optimalProxy = 'gh-proxy.com';
+          } else if (centralChina.some(p => region.includes(p)) || southChina.some(p => region.includes(p)) || northWest.some(p => region.includes(p))) {
+            optimalProxy = 'gh-proxy.org';
+          } else {
             optimalProxy = 'ghproxy.net';
-            break;
-          case 'HK':
-            optimalProxy = 'goproxy';
-            break;
-          case 'TW':
-            optimalProxy = 'goproxy';
-            break;
-          default:
-            optimalProxy = 'ghproxy.net';
+          }
+        } else {
+          switch (geo.country) {
+            case 'US':
+              optimalProxy = 'github';
+              break;
+            case 'JP':
+              optimalProxy = 'gh-proxy.org';
+              break;
+            case 'KR':
+              optimalProxy = 'gh-proxy.org';
+              break;
+            case 'SG':
+              optimalProxy = 'gh-proxy.org';
+              break;
+            case 'HK':
+              optimalProxy = 'github';
+              break;
+            case 'TW':
+              optimalProxy = 'github';
+              break;
+            default:
+              optimalProxy = 'ghproxy.net';
+          }
         }
       }
 
-      if (!localStorage.getItem('selectedProxy')) {
-        selectProxy(optimalProxy);
-      }
+      console.log('[AutoMatch] Selected proxy:', optimalProxy);
+      selectProxy(optimalProxy);
     });
   }
 
@@ -3187,7 +3183,6 @@
   }
 
   async function autoSelectFastestProxy() {
-    showLocationPermissionWarning();
     try {
       const fastestProxy = await findFastestProxy();
       selectProxy(fastestProxy);
@@ -3221,15 +3216,6 @@
     proxySectionTitle.className = 'proxy-section-title';
     proxySectionTitle.textContent = translations[currentLang]['代理'];
     menu.appendChild(proxySectionTitle);
-
-    const autoOption = document.createElement('div');
-    autoOption.className = 'proxy-option' + (currentProxy === 'auto' ? ' active' : '');
-    autoOption.onclick = () => selectProxy('auto');
-    autoOption.innerHTML = `
-      <span>${translations[currentLang]['自动匹配']}</span>
-      ${currentProxy === 'auto' ? '<span class="check">✓</span>' : ''}
-    `;
-    menu.appendChild(autoOption);
 
     proxyList.forEach(proxy => {
       if (proxy.name !== 'github') {
@@ -3391,10 +3377,9 @@
   const translations = {
     zh: {
       '官网': '官网',
-      'github': 'github',
+      'github': '官方GitHub仓库',
       '代理': '代理',
       '自动匹配': '自动匹配',
-      '友情下载站': '友情下载站',
       '其它': '其它',
       'Download AstraEditor': '下载 AstraEditor',
       '暂无下载资源': '暂无下载资源',
@@ -3421,7 +3406,6 @@
       'deb': '.deb',
       'rpm': '.rpm',
       'appimage': 'AppImage',
-      'snap': '.snap',
       'tar': '.tar.gz',
       'tarxz': '.tar.xz',
       'pkgzst': '.pkg.tar.zst',
@@ -3453,10 +3437,9 @@
     },
     en: {
       '官网': 'Official Website',
-      'github': 'GitHub',
+      'github': 'Official GitHub Repo',
       '代理': 'Proxy',
       '自动匹配': 'Auto Match',
-      '友情下载站': 'Mirror Site',
       '其它': 'Other',
       'Download AstraEditor': 'Download AstraEditor',
       '暂无下载资源': 'No download resources available',
@@ -3483,7 +3466,6 @@
       'deb': '.deb',
       'rpm': '.rpm',
       'appimage': 'AppImage',
-      'snap': '.snap',
       'tar': '.tar.gz',
       'tarxz': '.tar.xz',
       'pkgzst': '.pkg.tar.zst',
@@ -3734,7 +3716,6 @@
     } else {
       applyLang();
     }
-    showLocationPermissionWarning();
     selectOptimalProxyByLocation();
     loadDownloadsWithProxy();
     initAeScrollEffect();
